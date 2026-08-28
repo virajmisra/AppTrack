@@ -1,0 +1,192 @@
+{
+  "greenhouse": [
+    {
+      "name": "Stripe",
+      "boardToken": "stripe",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Airbnb",
+      "boardToken": "airbnb",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Robinhood",
+      "boardToken": "robinhood",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Affirm",
+      "boardToken": "affirm",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Reddit",
+      "boardToken": "reddit",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Figma",
+      "boardToken": "figma",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Discord",
+      "boardToken": "discord",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Duolingo",
+      "boardToken": "duolingo",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Instacart",
+      "boardToken": "instacart",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Coinbase",
+      "boardToken": "coinbase",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Brex",
+      "boardToken": "brex",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Gusto",
+      "boardToken": "gusto",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Asana",
+      "boardToken": "asana",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Pinterest",
+      "boardToken": "pinterest",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Lyft",
+      "boardToken": "lyft",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Twilio",
+      "boardToken": "twilio",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Dropbox",
+      "boardToken": "dropbox",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Squarespace",
+      "boardToken": "squarespace",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    }
+  ],
+  "githubFeeds": [
+    {
+      "name": "Simplify",
+      "url": "https://raw.githubusercontent.com/SimplifyJobs/Summer2027-Internships/dev/.github/scripts/listings.json",
+      "schema": "categorized",
+      "categories": [
+        "Software",
+        "AI/ML/Data",
+        "Product",
+        "Software Engineering",
+        "Data Science, AI & Machine Learning",
+        "Product Management"
+      ],
+      "excludeAny": ["phd", "senior", "staff", "principal", "mba"]
+    },
+    {
+      "name": "vanshb03",
+      "url": "https://raw.githubusercontent.com/vanshb03/Summer2027-Internships/dev/.github/scripts/listings.json",
+      "schema": "keyword",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    }
+  ]
+}
