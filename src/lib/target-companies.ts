@@ -55,3 +55,24 @@ export async function loadTargetCompanyNames(): Promise<Set<string>> {
 export function isTargetCompany(company: string, targetNames: Set<string>): boolean {
   return targetNames.has(normalizeCompanyName(company));
 }
+
+/** Maps every normalized target-company name/alias to the canonical display name from
+ * target-companies.json, so a company name read out of a confirmation email ("Pwc",
+ * "ANALOGDEVICES") can be resolved to the spelling the rest of the app uses ("PricewaterhouseCoopers
+ * (PwC)", "Analog Devices"). */
+export async function loadCanonicalCompanyNames(): Promise<Map<string, string>> {
+  const filePath = path.join(process.cwd(), "target-companies.json");
+  const raw = await readFile(filePath, "utf-8");
+  const parsed = JSON.parse(raw) as Partial<TargetCompaniesConfig>;
+
+  const canonical = new Map<string, string>();
+  for (const company of parsed.companies ?? []) {
+    canonical.set(normalizeCompanyName(company.name), company.name);
+    for (const alias of company.aliases ?? []) {
+      if (!canonical.has(normalizeCompanyName(alias))) {
+        canonical.set(normalizeCompanyName(alias), company.name);
+      }
+    }
+  }
+  return canonical;
+}

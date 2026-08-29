@@ -12,9 +12,16 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { StatusSelect } from "@/components/status-select";
+import { DetectedApplications } from "@/components/detected-applications";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
-import type { Application, ApplicationStatus } from "@/types/database";
+import type { Application, ApplicationSource, ApplicationStatus } from "@/types/database";
 import { createManualApplication } from "./actions";
+
+const SOURCE_LABEL: Record<ApplicationSource, string> = {
+  feed: "Feed",
+  manual: "Manual",
+  email: "Auto",
+};
 
 // Groups rows by how far along the pipeline they are, so live/active ones surface above
 // dead ones — rejected sinks to the bottom regardless of how recently it happened.
@@ -26,7 +33,9 @@ const STATUS_RANK: Record<ApplicationStatus, number> = {
   rejected: 4,
 };
 
-async function loadApplications(): Promise<{ applications: Application[] } | { setupError: string }> {
+async function loadApplications(): Promise<
+  { applications: Application[]; pendingDetections: Application[] } | { setupError: string }
+> {
   try {
     const supabase = getSupabaseServerClient();
     const { data, error } = await supabase.from("applications").select("*");
@@ -35,13 +44,21 @@ async function loadApplications(): Promise<{ applications: Application[] } | { s
       return { setupError: `Query failed: ${error.message}` };
     }
 
-    const applications = ((data ?? []) as Application[]).sort((a, b) => {
+    const all = (data ?? []) as Application[];
+    const sortByPipeline = (a: Application, b: Application) => {
       const rankDiff = STATUS_RANK[a.status] - STATUS_RANK[b.status];
       if (rankDiff !== 0) return rankDiff;
       return new Date(b.last_status_change_at).getTime() - new Date(a.last_status_change_at).getTime();
-    });
+    };
 
-    return { applications };
+    const pendingDetections = all
+      .filter((app) => app.review_state === "pending")
+      .sort((a, b) => new Date(b.date_applied).getTime() - new Date(a.date_applied).getTime());
+    const applications = all
+      .filter((app) => app.review_state !== "pending")
+      .sort(sortByPipeline);
+
+    return { applications, pendingDetections };
   } catch (err) {
     return { setupError: err instanceof Error ? err.message : "Unknown setup error" };
   }
@@ -64,9 +81,14 @@ export default async function ApplicationsPage() {
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Applications</h1>
         <p className="text-sm text-muted-foreground">
-          Everything you&apos;ve applied to — from the postings feed or added manually.
+          Everything you&apos;ve applied to — from the postings feed, auto-detected from your
+          email, or added manually.
         </p>
       </div>
+
+      {!("setupError" in result) && result.pendingDetections.length > 0 && (
+        <DetectedApplications rows={result.pendingDetections} />
+      )}
 
       <form
         action={createManualApplication}
@@ -150,7 +172,7 @@ export default async function ApplicationsPage() {
                   {application.notes ?? "—"}
                 </TableCell>
                 <TableCell className="text-muted-foreground">
-                  {application.posting_id ? "Feed" : "Manual"}
+                  {SOURCE_LABEL[application.source] ?? (application.posting_id ? "Feed" : "Manual")}
                 </TableCell>
               </TableRow>
             ))}

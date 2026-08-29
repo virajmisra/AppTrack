@@ -79,6 +79,38 @@ export async function createManualApplication(formData: FormData) {
   revalidatePath("/applications");
 }
 
+/** Accept a queued email-detected application: it stops showing in the review strip and is
+ * treated like any other tracked application from here on. */
+export async function confirmDetectedApplication(applicationId: string) {
+  const supabase = getSupabaseServerClient();
+  const { error } = await supabase
+    .from("applications")
+    .update({ review_state: "confirmed" })
+    .eq("id", applicationId)
+    .eq("review_state", "pending");
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/applications");
+  revalidatePath("/");
+}
+
+/** Reject a queued email-detected application: the row (and its status events) are deleted, so
+ * the linked posting reappears in the Postings feed. Only ever touches pending email detections —
+ * a manually-added or already-confirmed row can't be removed this way. */
+export async function dismissDetectedApplication(applicationId: string) {
+  const supabase = getSupabaseServerClient();
+  const { error } = await supabase
+    .from("applications")
+    .delete()
+    .eq("id", applicationId)
+    .eq("review_state", "pending")
+    .eq("source", "email");
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/applications");
+  revalidatePath("/");
+}
+
 export async function updateApplicationStatus(applicationId: string, status: ApplicationStatus) {
   const supabase = getSupabaseServerClient();
   const now = new Date().toISOString();

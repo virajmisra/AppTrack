@@ -11,13 +11,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
-import { dedupePostings, normalizeUrl } from "@/lib/postings";
+import { dedupePostings } from "@/lib/postings";
 import { getLastSyncedAt, isSyncStale, runSync } from "@/lib/sync";
-import { loadTargetCompanyNames, normalizeCompanyName } from "@/lib/target-companies";
+import { loadTargetCompanyNames } from "@/lib/target-companies";
 import { postingFitsGoals } from "@/lib/posting-fit";
+import { applicationMatchesPosting, type ApplicationLink } from "@/lib/application-match";
 import { getInterviewFit, type InterviewFit } from "@/lib/company-tier";
 import { cn } from "@/lib/utils";
-import type { Application, Posting } from "@/types/database";
+import type { Posting } from "@/types/database";
 
 const MAX_POSTING_AGE_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
@@ -49,47 +50,6 @@ const INTERVIEW_FIT_DISPLAY: Record<
     rowAccentClassName: "border-l-4 border-l-transparent",
   },
 };
-
-/** Words too generic to count as a signal when comparing a posting's title against a manually
- * logged application's role title (which is often paraphrased/truncated from a Gmail confirmation
- * rather than copied verbatim from the listing). */
-const TITLE_NOISE_WORDS = new Set([
-  "summer", "winter", "spring", "fall", "2025", "2026", "2027", "2028",
-  "intern", "internship", "co", "op", "coop", "program", "the", "a", "an",
-  "and", "or", "for", "in", "at", "of", "to",
-]);
-
-function significantTitleWords(title: string): Set<string> {
-  return new Set(
-    title
-      .toLowerCase()
-      .replace(/[^a-z0-9\s]/g, " ")
-      .split(/\s+/)
-      .filter((word) => word.length > 0 && !TITLE_NOISE_WORDS.has(word))
-  );
-}
-
-type ApplicationLink = Pick<Application, "posting_id" | "company" | "role_title" | "job_url">;
-
-/** Whether an already-logged application refers to this posting. Feed-sourced applications carry
- * an exact posting_id or job_url, but manually/Gmail-imported ones often have neither — for those,
- * fall back to matching company plus significant overlap in the role title. Best-effort: a
- * generically-worded application (e.g. "role unspecified in confirmation email") may not match
- * anything, leaving that posting visible rather than risking hiding an unrelated one. */
-function applicationMatchesPosting(posting: Posting, application: ApplicationLink): boolean {
-  if (application.posting_id && application.posting_id === posting.id) return true;
-  if (application.job_url && normalizeUrl(application.job_url) === normalizeUrl(posting.url)) return true;
-
-  if (normalizeCompanyName(application.company) !== normalizeCompanyName(posting.company)) return false;
-
-  const postingWords = significantTitleWords(posting.title);
-  const appWords = significantTitleWords(application.role_title);
-  if (postingWords.size === 0 || appWords.size === 0) return false;
-
-  const sharedCount = [...postingWords].filter((word) => appWords.has(word)).length;
-  const overlapRatio = sharedCount / Math.min(postingWords.size, appWords.size);
-  return overlapRatio >= 0.6;
-}
 
 interface LoadedPostings {
   postings: Posting[];

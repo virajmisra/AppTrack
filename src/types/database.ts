@@ -1,5 +1,13 @@
 export type ApplicationStatus = "applied" | "oa" | "interview" | "offer" | "rejected";
 
+/** Where an application row came from. 'feed' = the "Mark applied" button on a posting,
+ * 'manual' = the add-application form, 'email' = auto-detected from a confirmation email. */
+export type ApplicationSource = "feed" | "manual" | "email";
+
+/** 'pending' = a low-confidence email detection awaiting a one-click confirm (still hides its
+ * posting; dismissing deletes the row). 'confirmed' = trusted. */
+export type ApplicationReviewState = "pending" | "confirmed";
+
 export interface Posting {
   id: string;
   source: string;
@@ -34,6 +42,10 @@ export interface Application {
   last_status_change_at: string;
   created_at: string;
   updated_at: string;
+  source: ApplicationSource;
+  review_state: ApplicationReviewState;
+  /** Gmail message id for email-detected rows; dedupe key for the reconcile pipeline. */
+  source_ref: string | null;
 }
 
 export interface ApplicationStatusEvent {
