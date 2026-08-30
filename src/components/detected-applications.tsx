@@ -8,21 +8,13 @@ import {
   confirmDetectedApplication,
   dismissDetectedApplication,
 } from "@/app/applications/actions";
+import { formatDate } from "@/lib/format";
 import type { Application } from "@/types/database";
 
 type DetectedRow = Pick<
   Application,
   "id" | "company" | "role_title" | "job_url" | "status" | "date_applied" | "notes"
 >;
-
-function formatDate(value: string | null): string {
-  if (!value) return "—";
-  return new Date(value).toLocaleDateString(undefined, {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-}
 
 function DetectedItem({ row }: { row: DetectedRow }) {
   const router = useRouter();

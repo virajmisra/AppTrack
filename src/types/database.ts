@@ -1,5 +1,10 @@
 export type ApplicationStatus = "applied" | "oa" | "interview" | "offer" | "rejected";
 
+/** Reputation/interview-loop tier for a company. Canonical definition and the lookup live in
+ * `src/lib/company-tier.ts`; mirrored here so the slim `PostingRowData` doesn't have to import
+ * that (server-only) module. */
+export type InterviewFit = "ready_now" | "target" | "reach" | "unrated";
+
 /** Where an application row came from. 'feed' = the "Mark applied" button on a posting,
  * 'manual' = the add-application form, 'email' = auto-detected from a confirmation email. */
 export type ApplicationSource = "feed" | "manual" | "email";
@@ -27,6 +32,24 @@ export interface Posting {
   description_text: string | null;
   is_eligible: boolean;
   eligibility_checked_at: string | null;
+}
+
+/** Slim, fully-serializable projection of a `Posting` handed to the client-side Postings
+ * explorer. Deliberately omits `raw` (arbitrary API JSON) and `description_text` (long) to keep
+ * the RSC payload small, and precomputes the interview-fit tier server-side so
+ * `src/lib/company-tier.ts` (kilobytes of company-name arrays) never reaches the client bundle. */
+export interface PostingRowData {
+  id: string;
+  company: string;
+  title: string;
+  url: string;
+  location: string | null;
+  payRangeText: string | null;
+  /** `Date.parse(posted_at ?? first_seen_at)` — epoch ms, for client-side bucketing. */
+  postedTs: number;
+  /** `posted_at` was null, so `postedTs` is really `first_seen_at` (when we first saw it). */
+  approximate: boolean;
+  interviewFit: InterviewFit;
 }
 
 export interface Application {

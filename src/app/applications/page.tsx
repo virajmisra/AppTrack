@@ -14,6 +14,7 @@ import {
 import { StatusSelect } from "@/components/status-select";
 import { DetectedApplications } from "@/components/detected-applications";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { formatDate } from "@/lib/format";
 import type { Application, ApplicationSource, ApplicationStatus } from "@/types/database";
 import { createManualApplication } from "./actions";
 
@@ -62,15 +63,6 @@ async function loadApplications(): Promise<
   } catch (err) {
     return { setupError: err instanceof Error ? err.message : "Unknown setup error" };
   }
-}
-
-function formatDate(value: string | null): string {
-  if (!value) return "—";
-  return new Date(value).toLocaleDateString(undefined, {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
 }
 
 export default async function ApplicationsPage() {
