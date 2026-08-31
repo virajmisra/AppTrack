@@ -1,10 +1,15 @@
 import "server-only";
 import { loadSources } from "@/lib/sources";
 import { fetchGreenhouseJobs } from "@/lib/greenhouse";
+import { fetchLeverPostings } from "@/lib/lever";
 import { fetchGithubFeedPostings } from "@/lib/github-feed";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import type { NormalizedPosting } from "@/lib/postings";
-import { extractDescriptionFromRawContent, fetchDescriptionText } from "@/lib/description";
+import {
+  extractDescriptionFromLeverRaw,
+  extractDescriptionFromRawContent,
+  fetchDescriptionText,
+} from "@/lib/description";
 import { checkEligibility } from "@/lib/eligibility";
 
 /** How long synced postings are trusted before the dashboard triggers a fresh sync on load. Adjust freely. */
@@ -95,7 +100,9 @@ async function enrichEligibility(): Promise<{ checked: number; ineligible: numbe
           const descriptionText =
             row.source === "greenhouse"
               ? extractDescriptionFromRawContent(row.raw)
-              : await fetchDescriptionText(row.url);
+              : row.source === "lever"
+                ? extractDescriptionFromLeverRaw(row.raw)
+                : await fetchDescriptionText(row.url);
 
           const { eligible, reason } = checkEligibility(descriptionText);
           if (!eligible) ineligibleCount++;
@@ -180,6 +187,39 @@ export async function runSync(): Promise<SyncSummary> {
     }
 
     results.push({ source: `greenhouse:${source.name}`, fetched: jobs.length, deactivated: deactivated?.length ?? 0 });
+  }
+
+  // Lever: same per-company shape as Greenhouse — a token-addressed board, upsert what came back,
+  // then deactivate any source='lever' row for this company not refreshed this run.
+  for (const source of sources.lever) {
+    const jobs = await fetchLeverPostings(source);
+
+    if (jobs.length > 0) {
+      const { error: upsertError } = await supabase
+        .from("postings")
+        .upsert(
+          jobs.map((job) => toRow(job, syncStartedAt)),
+          { onConflict: "source,company,external_id" }
+        );
+      if (upsertError) {
+        throw new Error(`Upsert failed for ${source.name}: ${upsertError.message}`);
+      }
+    }
+
+    const { data: deactivated, error: deactivateError } = await supabase
+      .from("postings")
+      .update({ is_active: false })
+      .eq("source", "lever")
+      .eq("company", source.name)
+      .eq("is_active", true)
+      .lt("last_seen_at", syncStartedAt)
+      .select("id");
+
+    if (deactivateError) {
+      throw new Error(`Deactivation failed for ${source.name}: ${deactivateError.message}`);
+    }
+
+    results.push({ source: `lever:${source.name}`, fetched: jobs.length, deactivated: deactivated?.length ?? 0 });
   }
 
   // GitHub feeds: companies are dynamic (thousands of them), so fetch+filter every configured

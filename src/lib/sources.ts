@@ -11,6 +11,15 @@ export interface GreenhouseSource {
   excludeAny: string[];
 }
 
+/** Lever's public postings API (`api.lever.co/v0/postings/{boardToken}?mode=json`) has the same
+ * shape-of-problem as Greenhouse: a token-addressed board, title-keyword screening. */
+export interface LeverSource {
+  name: string;
+  boardToken: string;
+  requireAllGroups: string[][];
+  excludeAny: string[];
+}
+
 interface CategorizedGithubFeedSource {
   name: string;
   url: string;
@@ -33,6 +42,7 @@ export type GithubFeedSource = CategorizedGithubFeedSource | KeywordGithubFeedSo
 
 interface SourcesConfig {
   greenhouse: GreenhouseSource[];
+  lever: LeverSource[];
   githubFeeds: GithubFeedSource[];
 }
 
@@ -43,6 +53,7 @@ export async function loadSources(): Promise<SourcesConfig> {
 
   return {
     greenhouse: parsed.greenhouse ?? [],
+    lever: parsed.lever ?? [],
     githubFeeds: parsed.githubFeeds ?? [],
   };
 }

@@ -1,7 +1,7 @@
 import type { Posting } from "@/types/database";
 
 export interface NormalizedPosting {
-  source: "greenhouse" | "github-feed";
+  source: "greenhouse" | "lever" | "github-feed";
   company: string;
   external_id: string;
   title: string;
@@ -27,9 +27,9 @@ export function normalizeUrl(url: string): string {
   }
 }
 
-/** Keeps one row per normalized URL, preferring a direct-source (greenhouse) row over an aggregator (github-feed) row. */
+/** Keeps one row per normalized URL, preferring a direct-source (greenhouse/lever) row over an aggregator (github-feed) row. */
 export function dedupePostings(postings: Posting[]): Posting[] {
-  const bySourcePriority = (posting: Posting) => (posting.source === "greenhouse" ? 0 : 1);
+  const bySourcePriority = (posting: Posting) => (posting.source === "github-feed" ? 1 : 0);
 
   const byUrl = new Map<string, Posting>();
   for (const posting of postings) {

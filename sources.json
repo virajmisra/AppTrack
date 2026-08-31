@@ -161,6 +161,125 @@
         ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
       ],
       "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Databricks",
+      "boardToken": "databricks",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Roblox",
+      "boardToken": "roblox",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Cloudflare",
+      "boardToken": "cloudflare",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Datadog",
+      "boardToken": "datadog",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Samsara",
+      "boardToken": "samsara",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Verkada",
+      "boardToken": "verkada",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Scale AI",
+      "boardToken": "scaleai",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Flexport",
+      "boardToken": "flexport",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "GitLab",
+      "boardToken": "gitlab",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Vercel",
+      "boardToken": "vercel",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Airtable",
+      "boardToken": "airtable",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    },
+    {
+      "name": "Anthropic",
+      "boardToken": "anthropic",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
+    }
+  ],
+  "lever": [
+    {
+      "name": "Palantir",
+      "boardToken": "palantir",
+      "requireAllGroups": [
+        ["intern", "internship", "co-op", "coop"],
+        ["software engineer", "software engineering", "swe", "full stack", "frontend", "backend", "platform engineer", "machine learning", "ml engineer", "data engineer", "data scientist", "ai engineer", "applied scientist", "product manager", "product management", "apm"]
+      ],
+      "excludeAny": ["senior", "staff", "principal", "lead", "phd", "mba"]
     }
   ],
   "githubFeeds": [
