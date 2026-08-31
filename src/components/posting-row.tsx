@@ -7,37 +7,55 @@ import type { InterviewFit, PostingRowData } from "@/types/database";
 /** Shared column template — the sticky header strip and every row use the same track sizes so
  * they line up. Below `sm` the row ignores this and stacks (see `PostingRow`). */
 export const ROW_GRID =
-  "sm:grid sm:grid-cols-[0.5rem_9rem_minmax(0,1fr)_10rem_7rem_7rem_auto] sm:items-center sm:gap-x-3";
+  "sm:grid sm:grid-cols-[7rem_9rem_minmax(0,1fr)_9rem_6rem_6.5rem_auto] sm:items-center sm:gap-x-3";
 
 const FIT_DISPLAY: Record<
   InterviewFit,
-  { label: string; dotClassName: string; rowClassName: string }
+  { label: string; dotClassName: string; labelClassName: string; rowClassName: string }
 > = {
   ready_now: {
     label: "Ready now",
     dotClassName: "bg-emerald-500",
+    labelClassName: "text-emerald-600 dark:text-emerald-400",
     rowClassName: "bg-emerald-500/[0.04]",
   },
   target: {
     label: "Target",
     dotClassName: "bg-muted-foreground/50",
+    labelClassName: "text-foreground/70",
     rowClassName: "",
   },
   reach: {
     label: "Reach",
     dotClassName: "ring-1 ring-inset ring-muted-foreground/40",
+    labelClassName: "text-muted-foreground",
     rowClassName: "",
   },
-  // "Unrated" isn't a negative signal, just "not researched yet" — no dot, no styling.
+  // "Unrated" isn't a negative signal, just "not researched yet" — no dot, faded label.
   unrated: {
     label: "Unrated",
-    dotClassName: "",
+    dotClassName: "border border-dashed border-muted-foreground/40",
+    labelClassName: "text-muted-foreground/60",
     rowClassName: "",
   },
 };
 
 export function fitLabel(fit: InterviewFit): string {
   return FIT_DISPLAY[fit].label;
+}
+
+/** Dot + tier label ("● Ready now"). The "Opportunity" signal for a row. */
+function FitIndicator({ fit, className }: { fit: InterviewFit; className?: string }) {
+  const display = FIT_DISPLAY[fit];
+  return (
+    <span className={cn("inline-flex items-center gap-1.5 text-xs", className)}>
+      <span
+        aria-hidden
+        className={cn("size-2 shrink-0 rounded-full", display.dotClassName)}
+      />
+      <span className={cn("truncate", display.labelClassName)}>{display.label}</span>
+    </span>
+  );
 }
 
 /** Desktop column-label strip. Sticks to the top of the viewport while the list scrolls — works
@@ -50,7 +68,7 @@ export function PostingListHeader() {
         "sticky top-0 z-10 hidden border-b border-border bg-background/90 py-2 text-[0.7rem] font-medium tracking-wide text-muted-foreground uppercase backdrop-blur"
       )}
     >
-      <span />
+      <span>Opportunity</span>
       <span>Company</span>
       <span>Title</span>
       <span>Location</span>
@@ -73,22 +91,15 @@ export function PostingRow({ posting }: { posting: PostingRowData }) {
         fit.rowClassName
       )}
     >
-      {/* fit dot — its own grid cell on desktop, tucked into the meta row on mobile */}
-      <span
-        aria-hidden
-        title={fitLabel(posting.interviewFit)}
-        className={cn("hidden size-2 rounded-full sm:block", fit.dotClassName)}
-      />
+      {/* Opportunity tier — its own grid cell on desktop */}
+      <FitIndicator fit={posting.interviewFit} className="hidden sm:inline-flex" />
 
-      {/* mobile: company badge + fit + time on one line */}
-      <div className="flex items-center gap-2 sm:contents">
-        <span
-          aria-hidden
-          className={cn("size-2 shrink-0 rounded-full sm:hidden", fit.dotClassName)}
-        />
+      {/* mobile: company badge + tier + time on one line */}
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 sm:contents">
         <Badge variant="secondary" className="max-w-[9rem] truncate sm:max-w-full">
           {posting.company}
         </Badge>
+        <FitIndicator fit={posting.interviewFit} className="sm:hidden" />
         <span className="sm:hidden">
           <RelativeTime iso={iso} approximate={posting.approximate} />
         </span>
