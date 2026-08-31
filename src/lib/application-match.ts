@@ -1,5 +1,5 @@
 import { normalizeCompanyName } from "./target-companies";
-import { normalizeUrl } from "./postings";
+import { jobIdentityKey } from "./postings";
 import type { Application, Posting } from "@/types/database";
 
 /** Words too generic to count as a signal when comparing a posting's title against a logged
@@ -48,7 +48,7 @@ export function applicationMatchesPosting(
   application: ApplicationLink
 ): boolean {
   if (application.posting_id && application.posting_id === posting.id) return true;
-  if (application.job_url && normalizeUrl(application.job_url) === normalizeUrl(posting.url)) {
+  if (application.job_url && jobIdentityKey(application.job_url) === jobIdentityKey(posting.url)) {
     return true;
   }
 
@@ -77,8 +77,8 @@ export function findMatchingPosting<
   postings: P[]
 ): P | null {
   if (parsed.jobUrl) {
-    const normalized = normalizeUrl(parsed.jobUrl);
-    const urlMatch = postings.find((p) => normalizeUrl(p.url) === normalized);
+    const normalized = jobIdentityKey(parsed.jobUrl);
+    const urlMatch = postings.find((p) => jobIdentityKey(p.url) === normalized);
     if (urlMatch) return urlMatch;
   }
 

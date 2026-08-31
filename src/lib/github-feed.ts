@@ -40,6 +40,8 @@ function normalizeEntry(
   return {
     source: "github-feed",
     company: entry.company_name,
+    // Plain normalizeUrl, not jobIdentityKey: this is the row's stable per-source key, and
+    // re-keying it would deactivate and re-insert every posting whose feed URL ends in /apply.
     external_id: normalizeUrl(entry.url),
     title: entry.title,
     location: entry.locations?.join(", ") ?? null,

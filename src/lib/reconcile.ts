@@ -1,6 +1,6 @@
 import "server-only";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
-import { normalizeUrl } from "@/lib/postings";
+import { jobIdentityKey } from "@/lib/postings";
 import { normalizeCompanyName, loadCanonicalCompanyNames } from "@/lib/target-companies";
 import {
   findMatchingPosting,
@@ -127,12 +127,12 @@ function alreadyTracked(
   existing: ExistingApplication[]
 ): boolean {
   const parsedCompany = normalizeCompanyName(parsed.company);
-  const parsedUrl = parsed.jobUrl ? normalizeUrl(parsed.jobUrl) : null;
+  const parsedUrl = parsed.jobUrl ? jobIdentityKey(parsed.jobUrl) : null;
 
   return existing.some((app) => {
     if (app.source_ref && app.source_ref === parsed.emailId) return true;
     if (linkedPostingId && app.posting_id === linkedPostingId) return true;
-    if (parsedUrl && app.job_url && normalizeUrl(app.job_url) === parsedUrl) return true;
+    if (parsedUrl && app.job_url && jobIdentityKey(app.job_url) === parsedUrl) return true;
     if (normalizeCompanyName(app.company) !== parsedCompany) return false;
     return titleOverlapRatio(parsed.roleTitle, app.role_title) >= TITLE_MATCH_THRESHOLD;
   });
