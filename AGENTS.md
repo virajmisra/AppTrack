@@ -17,11 +17,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run dev` — start the dev server (local-only, no auth)
 - `npm run build` / `npm run start` — production build / start
 - `npm run lint` — ESLint
-- `npm test` — `node --test` over `src/**/*.test.ts` (no test-runner dependency; relies on `--experimental-strip-types`, so test files import siblings with the explicit `.ts` extension). Only `src/lib/application-emails.test.ts` so far — real-email fixtures pinning the confirmation-email parser.
+- `npm test` — `node --test` over `src/**/*.test.ts` (no test-runner dependency; relies on `--experimental-strip-types`, so test files import siblings with the explicit `.ts` extension). Two suites: `src/lib/application-emails.test.ts` (real-email fixtures pinning the confirmation-email parser) and `src/lib/eligibility.test.ts` (real posting descriptions pinning the disqualifier rules).
 - Schema changes live in `supabase/migrations/*.sql`, but there's no migration runner wired up — each migration is run manually, once, in the Supabase SQL Editor (true for `0001_init.sql` through `0004_application_detection.sql`).
 - A sync can be triggered manually outside the browser: `curl -X POST http://localhost:3000/api/sync`.
 - Application auto-detection: `GET /api/applications/reconcile` returns `{ watermark, since, suggestedQuery }`; `POST` it `{ emails: RawEmail[] }` (confirmation emails fetched via Gmail) and it turns them into `applications` rows. Meant to be run by the hourly check — see the Architecture note.
 - Required env vars in `.env.local` (gitignored): `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`.
+- `scripts/db.sh '<postgrest-query>'` reads the database (there's no `psql` or `supabase` CLI here). It loads the keys from `.env.local` and pages past PostgREST's silent 1000-row cap, which an unranged `curl` hits with no error — `scripts/db.sh --count '<query>'` and `--patch '<query>' '<json>'` are the other two modes.
+- Two project skills live in `.claude/skills/`: **`hourly-check`** (the standing maintenance routine — sync, backfill `target-companies.json`, classify unrated companies in `company-tier.ts`, reconcile applications from Gmail, verify) and **`add-source`** (verify an ATS board token really serves public JSON before adding it, since a dead token makes `sync.ts` throw and aborts every source behind it).
 
 ## Architecture
 
