@@ -41,6 +41,7 @@ yarn-error.log*
 
 # personal autofill data for staged job applications (PII — never commit)
 applicant-profile.json
+applicant-credentials.json
 
 # vercel
 .vercel
