@@ -3,7 +3,8 @@
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { Input } from "@/components/ui/input";
 import { SegmentedControl, type SegmentedOption } from "@/components/ui/segmented-control";
-import { PostingListHeader, PostingRow, fitLabel } from "@/components/posting-row";
+import { FitBadge, TIER_ORDER, fitLabel } from "@/components/fit-badge";
+import { PostingListHeader, PostingRow } from "@/components/posting-row";
 import {
   assignBucket,
   bucketWindowStart,
@@ -16,8 +17,23 @@ import type { InterviewFit, PostingRowData } from "@/types/database";
 
 type DateFilter = "all" | DateBucket;
 type TierFilter = "all" | InterviewFit;
+/** "newest" groups under date-bucket headings (the original behaviour); "opportunity" regroups
+ * the same rows under tier headings, best-first, still newest-first inside each tier. */
+type SortMode = "newest" | "opportunity";
 
-const TIER_ORDER: InterviewFit[] = ["ready_now", "target", "reach", "unrated"];
+const SORT_OPTIONS: SegmentedOption<SortMode>[] = [
+  { value: "newest", label: "Newest" },
+  { value: "opportunity", label: "Opportunity" },
+];
+
+/** One rendered group of rows — a date bucket or a tier, depending on the sort mode. */
+interface Section {
+  key: string;
+  label: string;
+  /** Set only in "opportunity" mode, so the heading can carry the tier badge. */
+  fit?: InterviewFit;
+  rows: PostingRowData[];
+}
 
 const subscribeToMinute = (callback: () => void) => {
   const id = setInterval(callback, 60_000);
@@ -49,6 +65,7 @@ export function PostingsExplorer({
   const now = useBucketingNow(nowSeed);
   const [dateFilter, setDateFilter] = useState<DateFilter>("all");
   const [tierFilter, setTierFilter] = useState<TierFilter>("all");
+  const [sortMode, setSortMode] = useState<SortMode>("newest");
   const [search, setSearch] = useState("");
 
   const query = search.trim().toLowerCase();
@@ -84,22 +101,39 @@ export function PostingsExplorer({
       return true;
     });
 
-    const grouped = new Map<DateBucket, PostingRowData[]>();
-    for (const p of filtered) {
-      const bucket = assignBucket(p.postedTs, now);
-      const list = grouped.get(bucket);
-      if (list) list.push(p);
-      else grouped.set(bucket, [p]);
+    // `postings` arrives newest-first from the server, and both groupings below preserve input
+    // order within a group — so rows stay newest-first inside a date bucket or a tier alike.
+    let sections: Section[];
+    if (sortMode === "opportunity") {
+      const byTier = new Map<InterviewFit, PostingRowData[]>();
+      for (const p of filtered) {
+        const list = byTier.get(p.interviewFit);
+        if (list) list.push(p);
+        else byTier.set(p.interviewFit, [p]);
+      }
+      sections = TIER_ORDER.filter((t) => byTier.has(t)).map((t) => ({
+        key: t,
+        label: fitLabel(t),
+        fit: t,
+        rows: byTier.get(t)!,
+      }));
+    } else {
+      const byBucket = new Map<DateBucket, PostingRowData[]>();
+      for (const p of filtered) {
+        const bucket = assignBucket(p.postedTs, now);
+        const list = byBucket.get(bucket);
+        if (list) list.push(p);
+        else byBucket.set(bucket, [p]);
+      }
+      sections = BUCKET_ORDER.filter((b) => byBucket.has(b)).map((b) => ({
+        key: b,
+        label: BUCKET_LABELS[b],
+        rows: byBucket.get(b)!,
+      }));
     }
 
-    const sections = BUCKET_ORDER.filter((b) => grouped.has(b)).map((b) => ({
-      bucket: b,
-      label: BUCKET_LABELS[b],
-      rows: grouped.get(b)!,
-    }));
-
     return { sections, shownCount: filtered.length, dateCounts, tierCounts };
-  }, [postings, now, dateFilter, tierFilter, query]);
+  }, [postings, now, dateFilter, tierFilter, sortMode, query]);
 
   const dateOptions: SegmentedOption<DateFilter>[] = [
     { value: "all", label: "All", count: dateCounts.all },
@@ -159,6 +193,13 @@ export function PostingsExplorer({
             value={tierFilter}
             onValueChange={setTierFilter}
           />
+          <span className="text-xs text-muted-foreground sm:ml-2">Sort</span>
+          <SegmentedControl
+            aria-label="Sort postings"
+            options={SORT_OPTIONS}
+            value={sortMode}
+            onValueChange={setSortMode}
+          />
         </div>
       </div>
 
@@ -206,13 +247,13 @@ export function PostingsExplorer({
         <div>
           <PostingListHeader />
           <div
-            key={`${dateFilter}-${tierFilter}-${query}`}
+            key={`${dateFilter}-${tierFilter}-${sortMode}-${query}`}
             className="animate-in fade-in duration-200"
           >
             {sections.map((section) => (
-              <section key={section.bucket}>
-                <h2 className="mt-6 mb-1 flex items-baseline gap-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase first:mt-2">
-                  {section.label}
+              <section key={section.key}>
+                <h2 className="mt-6 mb-1 flex items-center gap-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase first:mt-2">
+                  {section.fit ? <FitBadge fit={section.fit} className="normal-case" /> : section.label}
                   <span className="tabular-nums font-normal text-muted-foreground/70">
                     {section.rows.length}
                   </span>

@@ -1,28 +1,13 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { StatusSelect } from "@/components/status-select";
+import { ApplicationsTable } from "@/components/applications-table";
 import { DetectedApplications } from "@/components/detected-applications";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
-import { formatDate } from "@/lib/format";
-import type { Application, ApplicationSource, ApplicationStatus } from "@/types/database";
+import { getInterviewFit } from "@/lib/company-tier";
+import type { Application, ApplicationRowData, ApplicationStatus } from "@/types/database";
 import { createManualApplication } from "./actions";
-
-const SOURCE_LABEL: Record<ApplicationSource, string> = {
-  feed: "Feed",
-  manual: "Manual",
-  email: "Auto",
-};
 
 // Groups rows by how far along the pipeline they are, so live/active ones surface above
 // dead ones — rejected sinks to the bottom regardless of how recently it happened.
@@ -35,7 +20,7 @@ const STATUS_RANK: Record<ApplicationStatus, number> = {
 };
 
 async function loadApplications(): Promise<
-  { applications: Application[]; pendingDetections: Application[] } | { setupError: string }
+  { applications: ApplicationRowData[]; pendingDetections: Application[] } | { setupError: string }
 > {
   try {
     const supabase = getSupabaseServerClient();
@@ -55,9 +40,12 @@ async function loadApplications(): Promise<
     const pendingDetections = all
       .filter((app) => app.review_state === "pending")
       .sort((a, b) => new Date(b.date_applied).getTime() - new Date(a.date_applied).getTime());
-    const applications = all
+    // Resolve the company tier here, on the server, so `company-tier.ts` stays out of the
+    // client bundle — the table island only ever sees the resolved string.
+    const applications: ApplicationRowData[] = all
       .filter((app) => app.review_state !== "pending")
-      .sort(sortByPipeline);
+      .sort(sortByPipeline)
+      .map((app) => ({ ...app, interviewFit: getInterviewFit(app.company) }));
 
     return { applications, pendingDetections };
   } catch (err) {
@@ -123,53 +111,7 @@ export default async function ApplicationsPage() {
           No applications yet. Mark a posting as applied from the postings feed, or add one manually above.
         </div>
       ) : (
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Company</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Applied</TableHead>
-              <TableHead>Notes</TableHead>
-              <TableHead>Source</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {result.applications.map((application) => (
-              <TableRow key={application.id}>
-                <TableCell>
-                  <Badge variant="secondary">{application.company}</Badge>
-                </TableCell>
-                <TableCell className="max-w-sm truncate font-medium" title={application.role_title}>
-                  {application.job_url ? (
-                    <a
-                      href={application.job_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline underline-offset-4 hover:text-foreground/80"
-                    >
-                      {application.role_title}
-                    </a>
-                  ) : (
-                    application.role_title
-                  )}
-                </TableCell>
-                <TableCell>
-                  <StatusSelect applicationId={application.id} status={application.status} />
-                </TableCell>
-                <TableCell className="text-muted-foreground">
-                  {formatDate(application.date_applied)}
-                </TableCell>
-                <TableCell className="max-w-xs truncate text-muted-foreground">
-                  {application.notes ?? "—"}
-                </TableCell>
-                <TableCell className="text-muted-foreground">
-                  {SOURCE_LABEL[application.source] ?? (application.posting_id ? "Feed" : "Manual")}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <ApplicationsTable rows={result.applications} />
       )}
     </div>
   );

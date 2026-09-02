@@ -71,6 +71,12 @@ export interface Application {
   source_ref: string | null;
 }
 
+/** An `Application` plus its company's interview tier, resolved on the server so the client
+ * bundle never pulls in `src/lib/company-tier.ts` — same reason `PostingRowData` precomputes it. */
+export interface ApplicationRowData extends Application {
+  interviewFit: InterviewFit;
+}
+
 export interface ApplicationStatusEvent {
   id: string;
   application_id: string;
