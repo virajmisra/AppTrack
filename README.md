@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AppTrack
 
-## Getting Started
+A job board for one person. It collects software engineering internship postings from company
+job boards, narrows them to the ones worth applying to, and tracks the applications.
 
-First, run the development server:
+## What it does
+
+- Pulls postings from Greenhouse, Lever and public GitHub internship feeds — 31 company boards
+  and 2 feeds, around 2,000 active postings at any time.
+- Narrows them to technical roles at companies on a hand-curated allowlist.
+- Reads each posting's description to drop the ones an undergraduate can't apply to (security
+  clearance required, graduate students only) and to pull out the pay range.
+- Tracks applications, picking most of them up automatically from confirmation emails.
+- Hides postings once you've applied — or once you've decided you won't.
+
+## Running it
+
+Needs a [Supabase](https://supabase.com) project.
 
 ```bash
+npm install
+cp .env.local.example .env.local   # then fill in your Supabase URL and service role key
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+There is no migration runner: run each file in `supabase/migrations/` once, in order, in the
+Supabase SQL editor.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm test        # node --test
+npm run lint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Configuration
 
-## Learn More
+Three files are meant to be edited by hand as gaps show up:
 
-To learn more about Next.js, take a look at the following resources:
+| File | What it holds |
+| --- | --- |
+| `sources.json` | Which job boards to pull from |
+| `target-companies.json` | Which companies are worth applying to |
+| `company-tiers.json` | Optional. How demanding each company's interview loop is, used to sort postings. See `company-tiers.example.json` for the shape — without it, everything reads as unrated. |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Architecture
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[`AGENTS.md`](AGENTS.md) documents how the pipeline fits together and why it is built this way.
