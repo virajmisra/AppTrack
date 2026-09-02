@@ -63,29 +63,61 @@ unrated rather than guessing.
 ## 4. Reconcile applications from Gmail
 
 ```
-curl http://localhost:3000/api/applications/reconcile        # -> { watermark, since, suggestedQuery }
+curl http://localhost:3000/api/applications/reconcile   # -> { watermark, since, suggestedQuery, classificationContract }
 ```
 
-Run that Gmail search with this session's own Gmail tools, fetch each thread's plaintext body,
-and POST them back to the same endpoint:
+Run that Gmail search with this session's own Gmail tools and fetch each thread's plaintext body.
+Then **read each email yourself** and POST it back with your reading attached:
 
 ```
-{ "emails": [ { "id", "from", "subject", "bodyText", "date" } ] }
+{ "emails": [ {
+    "id", "from", "subject", "bodyText", "date",
+    "classification": {
+      "isApplicationEmail": true,
+      "company": "Southwest Airlines",
+      "roleTitle": "Spring 2027 Software Engineering Internships",
+      "jobUrl": null,
+      "status": "rejected",
+      "confidence": "high"
+    }
+} ] }
 ```
 
-The endpoint parses each with `src/lib/application-emails.ts`, resolves the company against
-`target-companies.json`, links a posting, and writes an `applications` row — high-confidence
-detections auto-confirmed, low-confidence queued in the amber "Detected" strip on the
-Applications page for a one-click confirm. It dedupes on the Gmail message id, so re-running
-over the same window is safe.
+`classificationContract` in the GET response is the authoritative field-by-field spec — read it
+rather than relying on this example. In short:
+
+- `isApplicationEmail` — false for job alerts, marketing, newsletters and recruiter cold-pitches.
+  Those are ignored.
+- `company` — as a person would name it ("Booz Allen Hamilton", not the `bah` sender slug, and
+  never the role title).
+- `roleTitle` — the role, with requisition ids and locations stripped. **Null when the email
+  genuinely never names one** — don't invent it; a null title queues the row for review.
+- `status` — `applied` / `oa` / `interview` / `offer` / `rejected`, as of *this* email. A
+  turn-down is `rejected` however politely it is worded.
+- `confidence` — `high` only when company and role are both unambiguous and the email plainly
+  states what happened.
+
+The endpoint resolves the company against `target-companies.json`, links a posting, and writes an
+`applications` row — high-confidence auto-confirmed, the rest queued in the amber "Detected" strip
+on the Applications page for a one-click confirm. It dedupes on the Gmail message id, so
+re-running over the same window is safe.
 
 This is how completed applications leave the Postings tab without anyone clicking anything.
 
-**Why this runs from the Claude session rather than the app:** it avoids adding a Google OAuth
-app and refresh token to `.env.local`, which fits the local, Claude-driven architecture and
-needs no new credentials. The app has no Gmail access of its own. Auto-confirming only
-high-confidence parses is deliberate — the heuristic parser once produced a phantom
-"Acme Corp" row.
+**Why you classify rather than a parser:** `src/lib/application-emails.ts` still holds a keyword
+and regex parser, and it is the fallback for any email posted *without* a `classification` — but
+it is strictly worse and should not be the path this routine takes. It reads meaning off fixed
+phrases, so it mis-parsed real mail in ways that are obvious to anything actually reading the
+sentence: "we can't move forward with your application" was recorded as `applied` because that
+exact wording wasn't in its rejection list; a leading requisition id swallowed a whole job title;
+a company's spelled-out name landed in the role field. **If you find yourself wanting to add a
+phrase to a marker list in that file, that's the signal to classify it here instead.**
+
+**Why this runs from the Claude session rather than the app:** the app has no Gmail credentials of
+its own — deliberately, to avoid adding a Google OAuth app and refresh token to `.env.local`. A
+session therefore has to fetch these emails anyway, which is exactly why it should also be the one
+reading them: it needs no new credentials and no API cost. Auto-confirming only high-confidence
+readings is deliberate — an early version of the parser once produced a phantom "Acme Corp" row.
 
 ## 5. Verify
 

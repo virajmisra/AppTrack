@@ -9,6 +9,7 @@ import {
 } from "@/lib/application-match";
 import {
   parseConfirmationEmail,
+  classificationToParsed,
   type RawEmail,
   type ParsedApplicationEmail,
 } from "@/lib/application-emails";
@@ -185,7 +186,14 @@ export async function reconcileConfirmationEmails(
       maxEmailDate = email.date;
     }
 
-    const parsed = parseConfirmationEmail(email);
+    // Prefer the reading the calling session already did over the keyword heuristics. The
+    // session has the whole email in front of it and judges phrasing the marker lists can't
+    // enumerate ("we can't move forward with your application" is a rejection; a requisition id
+    // is not a job title). `parseConfirmationEmail` stays as the fallback for a caller that
+    // supplies no classification.
+    const parsed = email.classification
+      ? classificationToParsed(email, email.classification)
+      : parseConfirmationEmail(email);
     if (!parsed) continue;
 
     // Resolve the emailed company name to the canonical spelling (handles ATS slugs like

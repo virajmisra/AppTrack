@@ -1,6 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { parseConfirmationEmail, type RawEmail } from "./application-emails.ts";
+import {
+  parseConfirmationEmail,
+  parseEmailClassification,
+  classificationToParsed,
+  type RawEmail,
+} from "./application-emails.ts";
 
 // Run with: npm test   (node --test --experimental-strip-types)
 //
@@ -182,3 +187,144 @@ for (const spam of [
     assert.equal(parseConfirmationEmail(spam), null);
   });
 }
+
+test("Workday: 'we can't move forward' reads as a rejection, not an application", () => {
+  const r = parseConfirmationEmail(
+    email({
+      from: "swa@myworkday.com",
+      subject:
+        "An update on your Southwest Airlines job application for R-2026-71386 Spring 2027 Software Engineering Internships",
+      bodyText:
+        "Hello Viraj, Thank you for your interest in the R-2026-71386 Spring 2027 Software Engineering Internships position and a career at Southwest Airlines! Unfortunately, we can't move forward with your application as you don't currently meet the minimum qualifications for this role. You're encouraged to search and apply for other available positions that align with your qualifications and experience.",
+    })
+  );
+  assert.ok(r);
+  assert.equal(r.company, "Southwest Airlines");
+  assert.equal(r.status, "rejected");
+  // The subject's leading requisition id must not take the title down with it.
+  assert.equal(r.roleTitle, "Spring 2027 Software Engineering Internships");
+});
+
+test("iCIMS: a spelled-out company name is not mistaken for the role title", () => {
+  const r = parseConfirmationEmail(
+    email({
+      from: "jhuapl+autoreply@talent.icims.com",
+      subject: "Thank you for applying to Johns Hopkins APL!",
+      bodyText:
+        "Dear Viraj, Thank you for applying to the Johns Hopkins Applied Physics Laboratory (APL). We appreciate your time and interest in joining our team! Our Talent Acquisition team will review your application.",
+    })
+  );
+  assert.ok(r);
+  assert.equal(r.company, "Johns Hopkins APL");
+  assert.equal(r.roleTitle, "Role unspecified in confirmation email");
+  assert.equal(r.confidence, "low");
+});
+
+test("a leading 'role of' / 'position' is trimmed off the extracted title", () => {
+  const pella = parseConfirmationEmail(
+    email({
+      from: "RecruitingCoordinator@pella.com",
+      subject: "Thank you for your application",
+      bodyText:
+        "Dear Viraj, Thank you for applying for the role of Software Intern - Summer 2027 - 253299! We are in the process of reviewing your application. Sincerely, Pella Family of Brands Recruiting Team",
+    })
+  );
+  assert.ok(pella);
+  assert.equal(pella.roleTitle, "Software Intern - Summer 2027");
+
+  const deere = parseConfirmationEmail(
+    email({
+      from: "notifications@deere.com",
+      subject: "Successfully submitted application for Viraj Misra",
+      bodyText:
+        "Hello Viraj Misra, We have received your application for position 2027 Intern - Product Engineering (123544). We are currently reviewing it. Best Regards, John Deere Talent Team",
+    })
+  );
+  assert.ok(deere);
+  assert.equal(deere.roleTitle, "2027 Intern");
+});
+
+// --- Session-supplied classifications -------------------------------------------------------
+//
+// The app has no Gmail credentials, so a Claude session has already read every one of these
+// emails before the reconcile endpoint sees it. When it says what an email means, that reading
+// is used and the heuristics above are skipped. These tests pin the adapter and its validation,
+// not the reading itself.
+
+test("a session classification is used verbatim, heuristics skipped", () => {
+  const raw = email({
+    id: "m1",
+    from: "swa@myworkday.com",
+    subject: "An update on your Southwest Airlines job application",
+    bodyText: "Unfortunately, we can't move forward with your application.",
+    date: "2026-09-01T16:03:58Z",
+  });
+  const classification = parseEmailClassification({
+    isApplicationEmail: true,
+    company: "Southwest Airlines",
+    roleTitle: "Spring 2027 Software Engineering Internships",
+    status: "rejected",
+    confidence: "high",
+  });
+  assert.ok(classification);
+  const parsed = classificationToParsed(raw, classification);
+  assert.ok(parsed);
+  assert.equal(parsed.company, "Southwest Airlines");
+  assert.equal(parsed.roleTitle, "Spring 2027 Software Engineering Internships");
+  assert.equal(parsed.status, "rejected");
+  assert.equal(parsed.confidence, "high");
+  assert.equal(parsed.appliedOn, "2026-09-01");
+});
+
+test("classification: a non-application email is dropped, as a null parse would be", () => {
+  const classification = parseEmailClassification({
+    isApplicationEmail: false,
+    company: "Handshake",
+    roleTitle: null,
+    status: "applied",
+    confidence: "low",
+  });
+  assert.ok(classification);
+  assert.equal(classificationToParsed(email({ id: "m2" }), classification), null);
+});
+
+test("classification: a missing role title forces the row into the review queue", () => {
+  const classification = parseEmailClassification({
+    isApplicationEmail: true,
+    company: "Johns Hopkins APL",
+    roleTitle: null,
+    status: "applied",
+    // Even asserted high, an unnamed role can't be auto-confirmed — there's nothing to confirm.
+    confidence: "high",
+  });
+  assert.ok(classification);
+  const parsed = classificationToParsed(email({ id: "m3" }), classification);
+  assert.ok(parsed);
+  assert.equal(parsed.roleTitle, "Role unspecified in confirmation email");
+  assert.equal(parsed.confidence, "low");
+});
+
+test("classification: no company means no row to file", () => {
+  const classification = parseEmailClassification({
+    isApplicationEmail: true,
+    company: null,
+    roleTitle: "Software Engineer Intern",
+    status: "applied",
+    confidence: "low",
+  });
+  assert.ok(classification);
+  assert.equal(classificationToParsed(email({ id: "m4" }), classification), null);
+});
+
+test("classification: a malformed or unknown-status payload is rejected, not coerced", () => {
+  assert.equal(parseEmailClassification(null), null);
+  assert.equal(parseEmailClassification({ isApplicationEmail: true }), null);
+  assert.equal(
+    parseEmailClassification({ isApplicationEmail: true, status: "ghosted", confidence: "high" }),
+    null
+  );
+  assert.equal(
+    parseEmailClassification({ isApplicationEmail: true, status: "applied", confidence: "maybe" }),
+    null
+  );
+});

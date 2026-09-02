@@ -9,6 +9,87 @@ export interface RawEmail {
   bodyText: string;
   /** ISO timestamp the email was received. */
   date: string;
+  /** What the Claude session running the hourly check made of this email. The app has no Gmail
+   * credentials, so a session has already read every one of these before the endpoint sees it —
+   * when it supplies a reading, that is used and the heuristics below are skipped entirely. */
+  classification?: EmailClassification;
+}
+
+/** A session-supplied reading of one email. Deliberately the whole judgment: whether this is an
+ * application email at all, who it is from, which role, and where the application now stands.
+ * Everything downstream of this (resolving the company against target-companies.json, linking a
+ * posting, deduping) stays in code, because those are lookups against our own data rather than
+ * acts of reading. */
+export interface EmailClassification {
+  /** False for anything that isn't a real application event — marketing, job alerts, newsletters,
+   * a recruiter cold-pitch. The email is then ignored, exactly as a `null` parse would be. */
+  isApplicationEmail: boolean;
+  /** Company as a human would name it, not an ATS slug, or null if genuinely unstated. */
+  company: string | null;
+  /** The role applied to, or null when the email never names one (some "thanks for applying"
+   * mail genuinely doesn't). Null lands the row in the review queue rather than inventing a title. */
+  roleTitle: string | null;
+  /** Direct link to the posting or the candidate's application, when the email contains one. */
+  jobUrl?: string | null;
+  /** Where the application stands *as of this email*. */
+  status: ApplicationStatus;
+  /** "high" only when the company and role are both unambiguous and the email plainly states
+   * what happened; "low" queues the row for a one-click confirm on the Applications page. */
+  confidence: "high" | "low";
+}
+
+const APPLICATION_STATUSES: ApplicationStatus[] = [
+  "applied", "oa", "interview", "offer", "rejected",
+];
+
+function isApplicationStatus(value: unknown): value is ApplicationStatus {
+  return typeof value === "string" && (APPLICATION_STATUSES as string[]).includes(value);
+}
+
+/** Validate an untrusted `classification` off the request body. Returns null when the shape is
+ * wrong, so a malformed classification falls back to the heuristic parser instead of throwing. */
+export function parseEmailClassification(value: unknown): EmailClassification | null {
+  if (!value || typeof value !== "object") return null;
+  const v = value as Record<string, unknown>;
+  if (typeof v.isApplicationEmail !== "boolean") return null;
+  if (!isApplicationStatus(v.status)) return null;
+  if (v.confidence !== "high" && v.confidence !== "low") return null;
+
+  const optionalString = (raw: unknown): string | null =>
+    typeof raw === "string" && raw.trim().length > 0 ? raw.trim() : null;
+
+  return {
+    isApplicationEmail: v.isApplicationEmail,
+    company: optionalString(v.company),
+    roleTitle: optionalString(v.roleTitle),
+    jobUrl: optionalString(v.jobUrl),
+    status: v.status,
+    confidence: v.confidence,
+  };
+}
+
+/** Turn a session's reading of an email into the same shape the heuristic parser produces, so
+ * everything downstream is identical whichever path produced it. Returns null when the session
+ * says this isn't an application email, or when it named no company (there is nothing to file
+ * the row under). A missing role title is tolerated but forces the row into the review queue. */
+export function classificationToParsed(
+  email: RawEmail,
+  classification: EmailClassification
+): ParsedApplicationEmail | null {
+  if (!classification.isApplicationEmail) return null;
+  if (!classification.company) return null;
+
+  return {
+    emailId: email.id,
+    company: classification.company,
+    companySlug: workdaySlug(email.from),
+    roleTitle: classification.roleTitle ?? "Role unspecified in confirmation email",
+    jobUrl: classification.jobUrl ?? null,
+    status: classification.status,
+    appliedOn: (email.date || new Date().toISOString()).slice(0, 10),
+    confidence: classification.roleTitle ? classification.confidence : "low",
+    subject: email.subject,
+  };
 }
 
 export interface ParsedApplicationEmail {
@@ -70,6 +151,11 @@ const REJECTION_MARKERS = [
   "unfortunately, we have decided", "unfortunately we will not", "not selected for this",
   "no longer under consideration", "chosen to move forward with other",
   "we have decided to pursue other",
+  // "Unfortunately, we can't move forward with your application as you don't currently meet the
+  // minimum qualifications" (Southwest Airlines via Workday) — a plain rejection that the
+  // "will not be moving forward" phrasings above all miss.
+  "can't move forward with your application", "cannot move forward with your application",
+  "can not move forward with your application", "unable to move forward with your application",
 ];
 
 const ASSESSMENT_MARKERS = [
@@ -218,15 +304,33 @@ function cleanRole(raw: string): string {
   return raw
     .split("\n")[0]
     .replace(/[)\s]*\(?\b(?:job\s*(?:number|id|req)?|requisition|jr|req)\b\s*[#:]?\s*[\w-]+\)?/gi, "")
+    // Leading requisition id, e.g. "R-2026-71386 Spring 2027 Software Engineering Internships"
+    // (Southwest via Workday). Must run before the trailing-number rules below, which would
+    // otherwise match inside "R-2026-…" and swallow the entire title.
+    .replace(/^[A-Za-z]{1,3}[-–—_]\d[\w-]*\s+/, "")
     .replace(/[-–—]\s*[A-Za-z]?R?\d[\w-]*\s*$/i, "") // trailing "-R00147803" / "- 39908"
     .replace(/\s*[-–—]\s*\d{3,}\b.*$/, "") // trailing "- 155557 - New York, NY"
     .replace(/\s+[–-]\s+[A-Z][A-Za-z. ]+,\s+[A-Z]{2}(?:,\s*[A-Z]{2,3})?\s*$/, "") // " – St. Louis, MO, US"
     .replace(/\s*[-–—]\s*(?:new york|jersey city|columbus|sunrise)[\w, ]*$/i, "")
     .replace(/^(?:our|the|a|your)\s+/i, "")
+    // Leading "role of "/"position " the capture group swallowed, e.g. "…applying for the role of
+    // Software Intern - Summer 2027" (Pella) and "…application for position 2027 Intern" (Deere).
+    .replace(/^(?:role|position|opening)(?:\s+of)?\s+/i, "")
     .replace(/\s+(?:role|position|opening)$/i, "")
     .replace(/[!.,]+$/, "")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+/** True when every word of `company` (ignoring one-letter fragments) also appears in `candidate`,
+ * i.e. the candidate is the company name written out more fully. */
+function companyTokensAllPresent(company: string, candidate: string): boolean {
+  const words = (value: string) =>
+    value.toLowerCase().split(/[^a-z0-9]+/).filter((word) => word.length > 1);
+  const companyWords = words(company);
+  if (companyWords.length === 0) return false;
+  const candidateWords = new Set(words(candidate));
+  return companyWords.every((word) => candidateWords.has(word));
 }
 
 /** Role/title from the subject or body. `company` is used to reject a match that just re-captured
@@ -280,6 +384,10 @@ function roleFromText(subject: string, body: string, company: string): string | 
     }
     // Needs a role-ish word unless it's a longer descriptive phrase.
     if (!ROLE_WORD_RE.test(cleaned) && cleaned.split(" ").length <= 3) continue;
+    // A role-word-free phrase that contains every word of the company name is the company spelled
+    // out, not a title — the prefix test above misses it when the two spellings diverge mid-string
+    // ("Johns Hopkins APL" vs "Johns Hopkins Applied Physics Laboratory (APL)").
+    if (!ROLE_WORD_RE.test(cleaned) && companyTokensAllPresent(company, cleaned)) continue;
     return cleaned;
   }
   return null;
