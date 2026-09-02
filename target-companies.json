@@ -1,860 +1,2782 @@
 {
   "companies": [
-    { "name": "Google", "aliases": ["Alphabet"] },
-    { "name": "Meta", "aliases": ["Facebook", "Meta Platforms"] },
-    { "name": "Amazon", "aliases": ["Amazon.com", "AWS", "Amazon Web Services"] },
-    { "name": "Apple" },
-    { "name": "Netflix" },
-    { "name": "Microsoft" },
-    { "name": "Nvidia" },
-    { "name": "OpenAI" },
-    { "name": "Anthropic" },
-    { "name": "ByteDance", "aliases": ["TikTok"] },
-    { "name": "Samsung", "aliases": ["Samsung Research America"] },
-    { "name": "IBM" },
-    { "name": "Oracle" },
-    { "name": "SAP" },
-    { "name": "Salesforce" },
-    { "name": "Adobe" },
-    { "name": "Intel" },
-    { "name": "AMD" },
-    { "name": "Qualcomm" },
-    { "name": "Cisco" },
-    { "name": "VMware" },
-
-    { "name": "Stripe" },
-    { "name": "Airbnb" },
-    { "name": "Robinhood" },
-    { "name": "Affirm" },
-    { "name": "Reddit" },
-    { "name": "Figma" },
-    { "name": "Discord" },
-    { "name": "Duolingo" },
-    { "name": "Instacart" },
-    { "name": "Coinbase" },
-    { "name": "Brex" },
-    { "name": "Gusto" },
-    { "name": "Asana" },
-    { "name": "Pinterest" },
-    { "name": "Lyft" },
-    { "name": "Twilio" },
-    { "name": "Dropbox" },
-    { "name": "Squarespace" },
-
-    { "name": "JPMorgan Chase", "aliases": ["JPMorgan", "JP Morgan", "JP Morgan Chase", "JPMorganChase", "Chase"] },
-    { "name": "Mastercard" },
-    { "name": "Visa" },
-    { "name": "PayPal" },
-    { "name": "Block", "aliases": ["Square"] },
-    { "name": "American Express", "aliases": ["Amex"] },
-    { "name": "Capital One", "aliases": ["Capital One Financial"] },
-    { "name": "Goldman Sachs" },
-    { "name": "Morgan Stanley" },
-    { "name": "Charles Schwab", "aliases": ["Schwab"] },
-    { "name": "Fidelity Investments", "aliases": ["Fidelity"] },
-    { "name": "Wells Fargo" },
-    { "name": "Citi", "aliases": ["Citigroup", "Citibank"] },
-    { "name": "Bank of America" },
-    { "name": "Intuit" },
-
-    { "name": "Uber", "aliases": ["Uber Technologies"] },
-    { "name": "DoorDash" },
-    { "name": "Spotify" },
-
-    { "name": "Databricks" },
-    { "name": "Snowflake" },
-    { "name": "Palantir", "aliases": ["Palantir Technologies"] },
-    { "name": "Scale AI" },
-    { "name": "LinkedIn" },
-    { "name": "Notion" },
-    { "name": "Airtable" },
-    { "name": "Ramp" },
-    { "name": "Plaid" },
-    { "name": "Rippling" },
-    { "name": "Deel" },
-    { "name": "Atlassian" },
-    { "name": "Datadog" },
-    { "name": "Cloudflare" },
-    { "name": "MongoDB" },
-    { "name": "Confluent" },
-    { "name": "ServiceNow" },
-    { "name": "HubSpot" },
-    { "name": "Workday" },
-    { "name": "Roblox" },
-    { "name": "Unity", "aliases": ["Unity Technologies"] },
-    { "name": "Epic Games" },
-    { "name": "Riot Games" },
-    { "name": "Electronic Arts", "aliases": ["EA"] },
-    { "name": "Zoom" },
-    { "name": "Slack" },
-    { "name": "DocuSign" },
-    { "name": "eBay" },
-    { "name": "Etsy" },
-    { "name": "Wayfair" },
-    { "name": "Chewy" },
-    { "name": "Snap", "aliases": ["Snapchat"] },
-
-    { "name": "Two Sigma" },
-    { "name": "Jane Street" },
-    { "name": "Citadel", "aliases": ["Citadel Securities"] },
-    { "name": "D.E. Shaw", "aliases": ["DE Shaw", "D. E. Shaw"] },
-    { "name": "Hudson River Trading" },
-    { "name": "Optiver" },
-    { "name": "Susquehanna", "aliases": ["SIG", "Susquehanna International Group", "Susquehanna International Group (SIG)"] },
-    { "name": "DRW" },
-    { "name": "Jump Trading", "aliases": ["Jump Trading Group"] },
-    { "name": "Millennium" },
-    { "name": "Marshall Wace" },
-    { "name": "Squarepoint Capital" },
-    { "name": "Virtu Financial" },
-    { "name": "G-Research" },
-    { "name": "Five Rings Capital" },
-    { "name": "Geneva Trading" },
-    { "name": "IMC Trading", "aliases": ["IMC"] },
-    { "name": "Old Mission" },
-    { "name": "Akuna Capital" },
-    { "name": "Chicago Trading Company" },
-    { "name": "Belvedere Trading" },
-    { "name": "DV Trading", "aliases": ["DV Group"] },
-    { "name": "Tradeweb" },
-    { "name": "Dimensional Fund Advisors" },
-    { "name": "PDT Partners" },
-    { "name": "The Voleon Group" },
-    { "name": "Verition Fund Management" },
-
-    { "name": "Analog Devices" },
-    { "name": "Applied Materials" },
-    { "name": "Autodesk" },
-    { "name": "Cadence Design Systems" },
-    { "name": "Corning" },
-    { "name": "KLA" },
-    { "name": "Keysight Technologies" },
-    { "name": "Marvell" },
-    { "name": "Microchip Technology" },
-    { "name": "Micron Technology", "aliases": ["Micron"] },
-    { "name": "NXP Semiconductors" },
-    { "name": "onsemi" },
-    { "name": "Texas Instruments" },
-    { "name": "SiFive" },
-    { "name": "Sony" },
-    { "name": "Nokia" },
-    { "name": "Philips" },
-    { "name": "Hitachi" },
-    { "name": "Trend Micro" },
-    { "name": "Palo Alto Networks" },
-    { "name": "Postman" },
-    { "name": "Celonis" },
-    { "name": "Verkada" },
-    { "name": "Samsara" },
-    { "name": "Shopify" },
-    { "name": "Workato" },
-    { "name": "Replit" },
-    { "name": "Modal" },
-    { "name": "Toyota Research Institute" },
-    { "name": "Motorola", "aliases": ["Motorola Solutions"] },
-    { "name": "HARMAN" },
-
-    { "name": "Perplexity AI", "aliases": ["Perplexity"] },
-    { "name": "Mistral AI", "aliases": ["Mistral"] },
-    { "name": "Cohere" },
-    { "name": "Neuralink" },
-    { "name": "Applied Intuition" },
-    { "name": "Hippocratic AI" },
-    { "name": "Deepgram" },
-    { "name": "Tenstorrent" },
-    { "name": "Anduril" },
-
-    { "name": "SpaceX" },
-    { "name": "Blue Origin" },
-    { "name": "Northrop Grumman" },
-    { "name": "RTX", "aliases": ["Raytheon"] },
-    { "name": "L3Harris Technologies", "aliases": ["L3Harris"] },
-    { "name": "GE Aerospace" },
-    { "name": "The Boeing Company", "aliases": ["Boeing"] },
-    { "name": "Skydio" },
-    { "name": "Zipline" },
-    { "name": "Varda Space" },
-    { "name": "Howmet Aerospace" },
-
-    { "name": "Rivian", "aliases": ["Rivian and Volkswagen Group Technologies"] },
-    { "name": "Tesla" },
-    { "name": "XPENG Motors", "aliases": ["XPENG"] },
-    { "name": "Nio" },
-    { "name": "Zoox" },
-    { "name": "Pony.ai" },
-
-    { "name": "BlackRock" },
-    { "name": "Blackstone" },
-    { "name": "Vanguard" },
-    { "name": "PIMCO" },
-    { "name": "BNY" },
-    { "name": "Deutsche Bank" },
-    { "name": "Royal Bank of Canada", "aliases": ["RBC"] },
-    { "name": "Bank of Montreal", "aliases": ["BMO"] },
-    { "name": "CIBC" },
-    { "name": "Mizuho Securities USA", "aliases": ["Mizuho"] },
-    { "name": "Northwestern Mutual" },
-    { "name": "Fannie Mae" },
-    { "name": "Freddie Mac" },
-    { "name": "Equifax" },
-    { "name": "Intercontinental Exchange, Inc.", "aliases": ["ICE", "Intercontinental Exchange"] },
-    { "name": "DTCC" },
-    { "name": "Synchrony Financial", "aliases": ["Synchrony"] },
-    { "name": "LPL Financial Holdings", "aliases": ["LPL Financial"] },
-    { "name": "PNC Financial Services", "aliases": ["PNC"] },
-    { "name": "Regions Bank" },
-    { "name": "KeyBank" },
-    { "name": "UMB" },
-    { "name": "Navy Federal", "aliases": ["Navy Federal Credit Union"] },
-    { "name": "The Hartford" },
-    { "name": "Sun Life" },
-    { "name": "Zurich Insurance" },
-
-    { "name": "Deloitte" },
-    { "name": "KPMG" },
-    { "name": "PricewaterhouseCoopers", "aliases": ["PwC"] },
-    { "name": "Boston Consulting Group", "aliases": ["BCG"] },
-
-    { "name": "Honeywell" },
-    { "name": "General Motors", "aliases": ["GM"] },
-    { "name": "GE Appliances" },
-    { "name": "GE Vernova" },
-    { "name": "Illinois Tool Works" },
-    { "name": "Eaton" },
-    { "name": "John Deere" },
-    { "name": "ITT" },
-    { "name": "W.W. Grainger", "aliases": ["Grainger"] },
-
-    { "name": "AbbVie" },
-    { "name": "Johnson & Johnson", "aliases": ["J&J"] },
-    { "name": "Genentech" },
-    { "name": "Amgen" },
-    { "name": "Medtronic" },
-    { "name": "Thermo Fisher Scientific", "aliases": ["Thermo Fisher"] },
-    { "name": "GSK" },
-    { "name": "Intuitive Surgical" },
-    { "name": "McKesson" },
-    { "name": "Humana" },
-    { "name": "Cigna Group", "aliases": ["Cigna"] },
-    { "name": "Veeva", "aliases": ["Veeva Systems"] },
-
-    { "name": "Procter & Gamble", "aliases": ["P&G"] },
-    { "name": "Sherwin-Williams" },
-    { "name": "Levi Strauss & Co.", "aliases": ["Levi's"] },
-    { "name": "Expedia Group", "aliases": ["Expedia"] },
-    { "name": "Fanatics" },
-
-    { "name": "The Walt Disney Company", "aliases": ["Disney"] },
-    { "name": "NBCUniversal" },
-    { "name": "Thomson Reuters" },
-
-    { "name": "Poshmark" },
-    { "name": "SHEIN" },
-    { "name": "Walmart", "aliases": ["Walmart Global Tech"] },
-    { "name": "Target", "aliases": ["Target Corporation"] },
-    { "name": "Costco", "aliases": ["Costco Wholesale"] },
-    { "name": "Home Depot", "aliases": ["The Home Depot"] },
-    { "name": "Lowe's", "aliases": ["Lowes"] },
-    { "name": "Best Buy" },
-    { "name": "Nike" },
-    { "name": "CVS Health", "aliases": ["CVS"] },
-    { "name": "Walgreens", "aliases": ["Walgreens Boots Alliance"] },
-    { "name": "Kroger" },
-    { "name": "Nordstrom" },
-    { "name": "Macy's" },
-    { "name": "Albertsons" },
-    { "name": "TJX", "aliases": ["TJX Companies"] },
-    { "name": "Ulta Beauty", "aliases": ["Ulta"] },
-
-    { "name": "Progressive" },
-    { "name": "Allstate" },
-    { "name": "State Farm" },
-    { "name": "GEICO" },
-    { "name": "Liberty Mutual" },
-    { "name": "MetLife" },
-    { "name": "Prudential" },
-    { "name": "AIG" },
-    { "name": "Travelers" },
-
-    { "name": "AT&T" },
-    { "name": "Verizon" },
-    { "name": "T-Mobile" },
-    { "name": "Comcast" },
-
-    { "name": "Delta Air Lines", "aliases": ["Delta"] },
-    { "name": "United Airlines" },
-    { "name": "American Airlines" },
-    { "name": "Southwest Airlines" },
-
-    { "name": "Lockheed Martin" },
-    { "name": "Booz Allen Hamilton", "aliases": ["Booz Allen"] },
-    { "name": "Leidos" },
-    { "name": "SAIC" },
-    { "name": "General Dynamics" },
-    { "name": "BAE Systems" },
-
-    { "name": "Vercel" },
-    { "name": "GitLab" },
-    { "name": "HashiCorp" },
-    { "name": "Elastic" },
-    { "name": "Grafana Labs" },
-    { "name": "PagerDuty" },
-    { "name": "Carta" },
-    { "name": "Faire" },
-    { "name": "Flexport" },
-
-    { "name": "Together AI" },
-    { "name": "Groq" },
-    { "name": "Cerebras" },
-
-    { "name": "Sage" },
-    { "name": "Hewlett Packard", "aliases": ["HP"] },
-    { "name": "PricewaterhouseCoopers", "aliases": ["PwC"] },
-    { "name": "Grant Thornton" },
-    { "name": "Crowe" },
-    { "name": "FTI Consulting" },
-    { "name": "CACI" },
-
-    { "name": "Chevron" },
-    { "name": "ConocoPhillips" },
-    { "name": "Occidental Petroleum", "aliases": ["Oxy"] },
-    { "name": "BP" },
-    { "name": "Devon Energy" },
-    { "name": "Berkshire Hathaway Energy" },
-    { "name": "Eversource Energy" },
-    { "name": "WEC Energy Group" },
-    { "name": "ONEOK" },
-    { "name": "Westinghouse Electric Company" },
-
-    { "name": "Interdigital" },
-    { "name": "Ecolab" },
-    { "name": "Teledyne" },
-    { "name": "Tencent" },
-    { "name": "thyssenkrupp" },
-    { "name": "Vertiv" },
-    { "name": "Magna" },
-    { "name": "Polaris" },
-    { "name": "Marmon Holdings" },
-
-    { "name": "Canadian Tire" },
-    { "name": "Canadian Solar" },
-    { "name": "Cooper Companies" },
-    { "name": "Copart" },
-    { "name": "Genworth Financial" },
-    { "name": "CNO Financial Group" },
-
-    { "name": "Lawrence Livermore National Laboratory", "aliases": ["LLNL"] },
-    { "name": "Argonne National Laboratory" },
-    { "name": "Savannah River National Laboratory" },
-
-    { "name": "Brookfield" },
-    { "name": "The Trade Desk" },
-    { "name": "Ontario Teachers' Pension Plan" },
-    { "name": "Techtronic Industries" },
-    { "name": "Repsol" },
-    { "name": "DP World" },
-    { "name": "Eurofins" },
-    { "name": "Delta Dental" },
-    { "name": "Sezzle" },
-    { "name": "The Federal Reserve System" },
-    { "name": "Continental Resources" },
-    { "name": "Commercial Metals" },
-    { "name": "Amcor" },
-    { "name": "Ameren" },
-    { "name": "Corpay" },
-    { "name": "Aptiv" },
-    { "name": "Artisan Partners" },
-    { "name": "Solar Turbines" },
-
-    { "name": "Auto-Owners Insurance" },
-    { "name": "Excellus BCBS" },
-    { "name": "GuideWell Mutual" },
-    { "name": "Pentair" },
-    { "name": "Verisk" },
-    { "name": "Framatome" },
-    { "name": "1X" },
-    { "name": "Acceldata" },
-    { "name": "Alayacare" },
-    { "name": "AlixPartners" },
-    { "name": "Altamira Technologies" },
-    { "name": "Altice USA" },
-    { "name": "Altom Transport" },
-    { "name": "American Fidelity" },
-    { "name": "Analysis Group" },
-    { "name": "Apex Technology, Inc." },
-    { "name": "Aquatic Capital Management" },
-    { "name": "Aramark" },
-    { "name": "Ardian" },
-    { "name": "Argmax" },
-    { "name": "Arizona State University" },
-    { "name": "Arlington County VA" },
-    { "name": "Arlo" },
-    { "name": "ASM Global" },
-    { "name": "Astera" },
-    { "name": "Astranis" },
-    { "name": "Atomic Semi" },
-    { "name": "Audax Group" },
-    { "name": "Axiomatic AI" },
-    { "name": "Bank of China USA" },
-    { "name": "Barkback" },
-    { "name": "Base Power" },
-    { "name": "Beacon Software" },
-    { "name": "Bee Sweet Citrus" },
-    { "name": "Bild AI" },
-    { "name": "Binance" },
-    { "name": "Black Box" },
-    { "name": "Black Cape" },
-    { "name": "BlinqLABS" },
-    { "name": "Blue Cross Blue Shield of Michigan" },
-    { "name": "BlueLabs Analytics" },
-    { "name": "Bosch Home Comfort" },
-    { "name": "Brandeis University" },
-    { "name": "Bree" },
-    { "name": "BRG" },
-    { "name": "Brio Water Technology" },
-    { "name": "Brunswick" },
-    { "name": "CalAmp" },
-    { "name": "Calpion/Plutus Health" },
-    { "name": "CALSTART" },
-    { "name": "Carnegie Mellon University" },
-    { "name": "Castleton Commodities International" },
-    { "name": "Catalist" },
-    { "name": "Chamberlain Group" },
-    { "name": "Circleback" },
-    { "name": "Cisive" },
-    { "name": "City of Manhattan Kansas" },
-    { "name": "Clinical Ink" },
-    { "name": "Cloudforce" },
-    { "name": "Clyde Companies" },
-    { "name": "Compeer Financial" },
-    { "name": "Composio" },
-    { "name": "Core & Main" },
-    { "name": "Cotiviti" },
-    { "name": "Creatify Lab " },
-    { "name": "Cresta" },
-    { "name": "CTGT" },
-    { "name": "CuspAI" },
-    { "name": "Cybernetic Labs" },
-    { "name": "Daktronics" },
-    { "name": "Dayshape" },
-    { "name": "Dee Zee" },
-    { "name": "Denari" },
-    { "name": "Dmg Media" },
-    { "name": "Doctors Without Borders" },
-    { "name": "Docugami" },
-    { "name": "Droyd Robotics" },
-    { "name": "Dryft" },
-    { "name": "DuCharme, McMillen & Associates" },
-    { "name": "e-Careers" },
-    { "name": "East Penn Manufacturing Company" },
-    { "name": "Egra" },
-    { "name": "Eluvio" },
-    { "name": "Encephalo Investments" },
-    { "name": "Engineers and Geoscientists BC" },
-    { "name": "Ensemble Health Partners" },
-    { "name": "EPRI" },
-    { "name": "Eragon" },
-    { "name": "Espa AI" },
-    { "name": "ETHGlobal" },
-    { "name": "Eulerity" },
-    { "name": "EV Realty" },
-    { "name": "Everstream Analytics" },
-    { "name": "Evolver" },
-    { "name": "Exa Labs" },
-    { "name": "Facility Solutions Group" },
-    { "name": "Felix Magazine" },
-    { "name": "Firetiger" },
-    { "name": "First Bank & Trust" },
-    { "name": "Flagright" },
-    { "name": "Forus" },
-    { "name": "Foundation Finance" },
-    { "name": "Four Hands" },
-    { "name": "Freeform" },
-    { "name": "Fullbay" },
-    { "name": "Fundwell" },
-    { "name": "General Intuition &amp; Medal" },
-    { "name": "Generation West Virginia" },
-    { "name": "Gensyn" },
-    { "name": "Geo Owl" },
-    { "name": "Gritt Robotics Inc" },
-    { "name": "Haize Labs" },
-    { "name": "HCompany" },
-    { "name": "Heliux" },
-    { "name": "Hermeus" },
-    { "name": "HEXAWARE" },
-    { "name": "Hiebing" },
-    { "name": "Hiverge" },
-    { "name": "HNTB" },
-    { "name": "Hone Health" },
-    { "name": "HPR (Hyannis Port Research)" },
-    { "name": "Hubs.is" },
-    { "name": "Hunt Oil Company" },
-    { "name": "IMEG" },
-    { "name": "Inbulks" },
-    { "name": "Incident IQ" },
-    { "name": "Infojini" },
-    { "name": "Instead" },
-    { "name": "Institute of Foundation Models" },
-    { "name": "Integra FEC" },
-    { "name": "Interco" },
-    { "name": "International Rescue Committee (IRC)" },
-    { "name": "Internship" },
-    { "name": "Jade Global" },
-    { "name": "Jobs for Humanity" },
-    { "name": "Junior AI" },
-    { "name": "k-ID" },
-    { "name": "K1" },
-    { "name": "Kastle" },
-    { "name": "Kastle AI" },
-    { "name": "Kodiak Robotics" },
-    { "name": "Kognitos" },
-    { "name": "Later" },
-    { "name": "LAXIR" },
-    { "name": "Leland" },
-    { "name": "Liberty University" },
-    { "name": "LightGuide, Inc." },
-    { "name": "Lila Sciences" },
-    { "name": "Louisiana Blue" },
-    { "name": "Louisiana State University (LSU)" },
-    { "name": "Mapjects" },
-    { "name": "Markem-Imaje" },
-    { "name": "Mass General Brigham" },
-    { "name": "Maxima" },
-    { "name": "McGill University" },
-    { "name": "Medpace, Inc." },
-    { "name": "Melius" },
-    { "name": "Menasha Corporation" },
-    { "name": "Meshy" },
-    { "name": "Miami University" },
-    { "name": "Mindsmith" },
-    { "name": "Montenson" },
-    { "name": "Mosaic" },
-    { "name": "MPR Associates" },
-    { "name": "Mujin" },
-    { "name": "Multiply Labs" },
-    { "name": "Muru" },
-    { "name": "MyEmployment" },
-    { "name": "Nash" },
-    { "name": "National Laboratory of the Rockies" },
-    { "name": "NationGraph" },
-    { "name": "Nebo" },
-    { "name": "NeoCognition" },
-    { "name": "NewsBreak" },
-    { "name": "Nexstar" },
-    { "name": "Nextiva" },
-    { "name": "Niural" },
-    { "name": "Novogradac" },
-    { "name": "Obsidian Solutions Group" },
-    { "name": "Ohio State University" },
-    { "name": "Oligo Space" },
-    { "name": "Omnis" },
-    { "name": "Onware" },
-    { "name": "Open Road Integrated Media" },
-    { "name": "OpusClip" },
-    { "name": "Orennia" },
-    { "name": "Output Biosciences" },
-    { "name": "PathAI" },
-    { "name": "PennState University" },
-    { "name": "Pennsylvania State University" },
-    { "name": "Persona AI" },
-    { "name": "Phonely" },
-    { "name": "Pivot Robotics" },
-    { "name": "Primetals Technologies" },
-    { "name": "ProNexus" },
-    { "name": "Prospect Equities" },
-    { "name": "PSECU" },
-    { "name": "PSP Investments" },
-    { "name": "Pylon" },
-    { "name": "Quadrillion" },
-    { "name": "Quantbot Technologies" },
-    { "name": "QuEra Computing" },
-    { "name": "Rainmaker" },
-    { "name": "Red Bull" },
-    { "name": "RegDesk" },
-    { "name": "Rendezvous Robotics" },
-    { "name": "RESPEC" },
-    { "name": "ResponsiveAds" },
-    { "name": "Revvity" },
-    { "name": "Reyes Beverage Group" },
-    { "name": "RFCUNY" },
-    { "name": "RRS Group" },
-    { "name": "Ryan Companies" },
-    { "name": "Rystad Energy" },
-    { "name": "Saint Leo University" },
-    { "name": "Sandhills Global" },
-    { "name": "SchoolMint" },
-    { "name": "Schweitzer Engineering Laboratories" },
-    { "name": "SCOR" },
-    { "name": "Serval" },
-    { "name": "Seven Research" },
-    { "name": "ShyftLabs" },
-    { "name": "SimonComputing" },
-    { "name": "Smiths Detection" },
-    { "name": "Solid Power" },
-    { "name": "SoloPulse" },
-    { "name": "Somerce" },
-    { "name": "SOTI" },
-    { "name": "Specialisterne" },
-    { "name": "Specter Aerospace" },
-    { "name": "SpreeAI " },
-    { "name": "Springs Window Fashions" },
-    { "name": "Stellar Science" },
-    { "name": "StudyFetch" },
-    { "name": "Sweatpals" },
-    { "name": "Swift" },
-    { "name": "Sysco" },
-    { "name": "TechInsights" },
-    { "name": "Texas A&M International University" },
-    { "name": "The Browser Company" },
-    { "name": "The Campbell's Company" },
-    { "name": "The Nuclear Company" },
-    { "name": "The Wharton School" },
-    { "name": "Thingtrax" },
-    { "name": "TIFIN" },
-    { "name": "Tilde Research" },
-    { "name": "TMEIC" },
-    { "name": "TMEIC Corporation Americas" },
-    { "name": "TransMarket Group" },
-    { "name": "TribalScale" },
-    { "name": "Tuckernuck" },
-    { "name": "UHY" },
-    { "name": "Uline" },
-    { "name": "Uncountable" },
-    { "name": "University Health Network" },
-    { "name": "University of Arkansas" },
-    { "name": "University of Nevada, Reno" },
-    { "name": "University of St. Thomas" },
-    { "name": "University of Texas at Austin" },
-    { "name": "University of Virginia" },
-    { "name": "University System of New Hampshire" },
-    { "name": "Urban Science" },
-    { "name": "Valstad" },
-    { "name": "Vendelux" },
-    { "name": "VetsEZ" },
-    { "name": "Vital Lyfe" },
-    { "name": "Vitalant" },
-    { "name": "Winland Foods" },
-    { "name": "Worcester Polytechnic Institute" },
-    { "name": "Xpansiv" },
-    { "name": "Xsolla" },
-    { "name": "Yotta Labs" },
-    { "name": "Zello" },
-    { "name": "Zettabyte" },
-    { "name": "Zuru" },
-    { "name": "Abridge" },
-    { "name": "Abundant" },
-    { "name": "AeroVect" },
-    { "name": "AfterQuery" },
-    { "name": "Alberta Investment Management Corporation" },
-    { "name": "Allegheny County" },
-    { "name": "Ambarella" },
-    { "name": "Ambrook" },
-    { "name": "American Enterprise Institute" },
-    { "name": "American Institutes for Research" },
-    { "name": "AMI" },
-    { "name": "Ampersand" },
-    { "name": "Ancestry" },
-    { "name": "Appian" },
-    { "name": "Aquatic" },
-    { "name": "Aquatic Capital" },
-    { "name": "Arthur J. Gallagher & Co." },
-    { "name": "ASM International" },
-    { "name": "Astera Labs" },
-    { "name": "Atoms" },
-    { "name": "Auctor" },
-    { "name": "Baseten" },
-    { "name": "BerryDunn" },
-    { "name": "Business Insider" },
-    { "name": "Campbell Soup Company" },
-    { "name": "Capacity" },
-    { "name": "Carbon Engineering Ltd." },
-    { "name": "Centene" },
-    { "name": "Centerfield" },
-    { "name": "Chemours" },
-    { "name": "City of Baltimore" },
-    { "name": "CloudFit Software" },
-    { "name": "Codeage" },
-    { "name": "Cole Engineering Services" },
-    { "name": "Concentric" },
-    { "name": "Conduent" },
-    { "name": "ConnectPrep" },
-    { "name": "Customers Bank" },
-    { "name": "Dallas College" },
-    { "name": "Dedalus Labs" },
-    { "name": "Dexmate" },
-    { "name": "Diamondback Energy" },
-    { "name": "Elk Valley Resources" },
-    { "name": "Ellipsis Labs" },
-    { "name": "Empirical Foods" },
-    { "name": "EquipmentShare" },
-    { "name": "Etched" },
-    { "name": "Eudia" },
-    { "name": "Exa" },
-    { "name": "fab2" },
-    { "name": "FAST Enterprises" },
-    { "name": "Filtration Group" },
-    { "name": "First Quality" },
-    { "name": "Frontier Health" },
-    { "name": "Fussball Club Cincinnati LLC (\u201cFC Cincinnati\u201d)" },
-    { "name": "Garda Capital Partners" },
-    { "name": "Gartner" },
-    { "name": "GCI" },
-    { "name": "Geisinger" },
-    { "name": "GenMD" },
-    { "name": "Georgian Partners Growth" },
-    { "name": "GlossGenius" },
-    { "name": "Gulfstream" },
-    { "name": "Helsing" },
-    { "name": "Howard University" },
-    { "name": "Huck Adventures" },
-    { "name": "Human Computer Lab" },
-    { "name": "Hypercubic" },
-    { "name": "HyperLight" },
-    { "name": "iFLIP4" },
-    { "name": "iHeartMedia" },
-    { "name": "InstaLILY" },
-    { "name": "IntelliGenesis" },
-    { "name": "Intropic" },
-    { "name": "Lightcast" },
-    { "name": "Luminance" },
-    { "name": "L\u00e9ger" },
-    { "name": "Mackenzie Investments" },
-    { "name": "Maximor AI" },
-    { "name": "Maxinsights" },
-    { "name": "Medical Informatics Engineering" },
-    { "name": "Meridian Partners" },
-    { "name": "METECS" },
-    { "name": "MKS Instruments" },
-    { "name": "Mobius Renewables" },
-    { "name": "Monolithic Power Systems" },
-    { "name": "Montgomery Investment Technology, Inc." },
-    { "name": "Moon" },
-    { "name": "Na\u00efve" },
-    { "name": "Netic" },
-    { "name": "North Atlantic Industries" },
-    { "name": "Novanta" },
-    { "name": "Penta Group" },
-    { "name": "Phoebe" },
-    { "name": "Phoenix Contact" },
-    { "name": "Phonic" },
-    { "name": "Praytell" },
-    { "name": "Quadrillion Labs" },
-    { "name": "Realm" },
-    { "name": "Rivet Industries" },
-    { "name": "Roam" },
-    { "name": "Robert Bosch LLC" },
-    { "name": "S&B Engineers and Constructors" },
-    { "name": "Sabre Systems" },
-    { "name": "SciTec" },
-    { "name": "SightCall" },
-    { "name": "SimIS" },
-    { "name": "Sixtyfour (X25)" },
-    { "name": "SK Hynix Memory Solution" },
-    { "name": "Space Dynamics Laboratory" },
-    { "name": "Spacial AI" },
-    { "name": "StarSling" },
-    { "name": "Steven's Capital Management" },
-    { "name": "Stoke Space" },
-    { "name": "Suncor" },
-    { "name": "Super" },
-    { "name": "Syska Hennessy Group" },
-    { "name": "Teledyne Technologies Incorporated" },
-    { "name": "Terranova" },
-    { "name": "Tessera Labs" },
-    { "name": "TETRAMEM" },
-    { "name": "Truveta" },
-    { "name": "Turabify" },
-    { "name": "Two Six Technologies" },
-    { "name": "U.S. Venture" },
-    { "name": "Unify" },
-    { "name": "University of Pikeville" },
-    { "name": "Viridien" },
-    { "name": "Weave" },
-    { "name": "Wex" },
-    { "name": "WhiteWater Midstream" },
-    { "name": "Zip" },
-    { "name": "Zoomifier" },
-    { "name": " CCC Intelligent Solutions" },
-    { "name": "Air Products" },
-    { "name": "AnaVation" },
-    { "name": "Bland AI" },
-    { "name": "Blockhouse" },
-    { "name": "Commerce Bank" },
-    { "name": "CSX" },
-    { "name": "Emerson Electric" },
-    { "name": "Emory University" },
-    { "name": "Hoffman Construction" },
-    { "name": "Iberdrola Group" },
-    { "name": "Johns Manville" },
-    { "name": "Lawrence Berkeley National Laboratory" },
-    { "name": "Lennox International" },
-    { "name": "Manulife Financial" },
-    { "name": "Marsh" },
-    { "name": "RJ Lee Group" },
-    { "name": "ROCKWOOL Group" },
-    { "name": "TELUS Digital" },
-    { "name": "Anheuser-Busch" },
-    { "name": "Huntington Bancshares" },
-    { "name": "Nationwide" },
-    { "name": "Schroders" },
-    { "name": "TIAA" },
-    { "name": "10a Labs" },
-    { "name": "AARP" },
-    { "name": "Aerotech" },
-    { "name": "Arch Capital Group" },
-    { "name": "Astrion" },
-    { "name": "Blackhawk Network Holdings" },
-    { "name": "BlueCross BlueShield of Nebraska" },
-    { "name": "By Light Professional IT Services" },
-    { "name": "C3.ai" },
-    { "name": "Cardinal Health" },
-    { "name": "Clerkie" },
-    { "name": "Cvent" },
-    { "name": "Dow Chemical Company" },
-    { "name": "DraftKings" },
-    { "name": "Edison International" },
-    { "name": "Emerging Tech" },
-    { "name": "Exelon" },
-    { "name": "Fifth Third Bank" },
-    { "name": "First National Bank" },
-    { "name": "GE Healthcare" },
-    { "name": "HP IQ" },
-    { "name": "Hilton Worldwide" },
-    { "name": "IAT Insurance Group" },
-    { "name": "IGS Energy" },
-    { "name": "ISN Software" },
-    { "name": "Intelcom | Dragonfly" },
-    { "name": "Koch Industries" },
-    { "name": "Major League Baseball" },
-    { "name": "Maven Securities" },
-    { "name": "Medline" },
-    { "name": "Merchants Bank of Indiana" },
-    { "name": "Michael Baker International" },
-    { "name": "Momentive" },
-    { "name": "NiSource" },
-    { "name": "Northeastern University" },
-    { "name": "Northwood Space" },
-    { "name": "Oshkosh" },
-    { "name": "PGIM" },
-    { "name": "Panasonic Holdings" },
-    { "name": "Protiviti" },
-    { "name": "Prudential Financial" },
-    { "name": "Qorvo" },
-    { "name": "Robert Bosch Venture Capital" },
-    { "name": "SDSU Research Foundation" },
-    { "name": "Sierra" },
-    { "name": "Stryker" },
-    { "name": "TC Energy" },
-    { "name": "TD Bank" },
-    { "name": "Textron" },
-    { "name": "Thea Energy" },
-    { "name": "Trane Technologies" },
-    { "name": "United Parcel Service" },
-    { "name": "Upbring" },
-    { "name": "Verdantas" },
-    { "name": "Waymo" },
-    { "name": "Wealthsimple" },
-    { "name": "WhatNot" },
-    { "name": "Woodward Governor" }
+    {
+      "name": " CCC Intelligent Solutions"
+    },
+    {
+      "name": "10a Labs"
+    },
+    {
+      "name": "1X"
+    },
+    {
+      "name": "AARP"
+    },
+    {
+      "name": "AbbVie"
+    },
+    {
+      "name": "Abridge"
+    },
+    {
+      "name": "Abundant"
+    },
+    {
+      "name": "Acceldata"
+    },
+    {
+      "name": "Adobe"
+    },
+    {
+      "name": "Aerotech"
+    },
+    {
+      "name": "AeroVect"
+    },
+    {
+      "name": "AeroVironment"
+    },
+    {
+      "name": "Affirm"
+    },
+    {
+      "name": "AfterQuery"
+    },
+    {
+      "name": "AIG"
+    },
+    {
+      "name": "Air Products"
+    },
+    {
+      "name": "Airbnb"
+    },
+    {
+      "name": "Airtable"
+    },
+    {
+      "name": "Akuna Capital"
+    },
+    {
+      "name": "Alayacare"
+    },
+    {
+      "name": "Alberta Investment Management Corporation"
+    },
+    {
+      "name": "Albertsons"
+    },
+    {
+      "name": "AlixPartners"
+    },
+    {
+      "name": "Allegheny County"
+    },
+    {
+      "name": "Allstate"
+    },
+    {
+      "name": "Altamira Technologies"
+    },
+    {
+      "name": "Altice USA"
+    },
+    {
+      "name": "Altom Transport"
+    },
+    {
+      "name": "Amazon",
+      "aliases": [
+        "Amazon.com",
+        "AWS",
+        "Amazon Web Services"
+      ]
+    },
+    {
+      "name": "Ambarella"
+    },
+    {
+      "name": "Ambrook"
+    },
+    {
+      "name": "Amcor"
+    },
+    {
+      "name": "AMD"
+    },
+    {
+      "name": "Ameren"
+    },
+    {
+      "name": "American Airlines"
+    },
+    {
+      "name": "American Enterprise Institute"
+    },
+    {
+      "name": "American Express",
+      "aliases": [
+        "Amex"
+      ]
+    },
+    {
+      "name": "American Fidelity"
+    },
+    {
+      "name": "American Institutes for Research"
+    },
+    {
+      "name": "Ameriprise Financial"
+    },
+    {
+      "name": "Amgen"
+    },
+    {
+      "name": "AMI"
+    },
+    {
+      "name": "Ampersand"
+    },
+    {
+      "name": "Analog Devices"
+    },
+    {
+      "name": "Analysis Group"
+    },
+    {
+      "name": "AnaVation"
+    },
+    {
+      "name": "Ancestry"
+    },
+    {
+      "name": "Anduril"
+    },
+    {
+      "name": "Anheuser-Busch"
+    },
+    {
+      "name": "Anthropic"
+    },
+    {
+      "name": "Apex Technology, Inc."
+    },
+    {
+      "name": "Appian"
+    },
+    {
+      "name": "Apple"
+    },
+    {
+      "name": "Applied Intuition"
+    },
+    {
+      "name": "Applied Materials"
+    },
+    {
+      "name": "Aptiv"
+    },
+    {
+      "name": "Aquatic"
+    },
+    {
+      "name": "Aquatic Capital"
+    },
+    {
+      "name": "Aquatic Capital Management"
+    },
+    {
+      "name": "Aramark"
+    },
+    {
+      "name": "Arch Capital Group"
+    },
+    {
+      "name": "Ardian"
+    },
+    {
+      "name": "Argmax"
+    },
+    {
+      "name": "Argonne National Laboratory"
+    },
+    {
+      "name": "Arizona State University"
+    },
+    {
+      "name": "Arlington County VA"
+    },
+    {
+      "name": "Arlo"
+    },
+    {
+      "name": "Arthur J. Gallagher & Co."
+    },
+    {
+      "name": "Artisan Partners"
+    },
+    {
+      "name": "Asana"
+    },
+    {
+      "name": "ASM Global"
+    },
+    {
+      "name": "ASM International"
+    },
+    {
+      "name": "Astera"
+    },
+    {
+      "name": "Astera Labs"
+    },
+    {
+      "name": "Astranis"
+    },
+    {
+      "name": "Astrion"
+    },
+    {
+      "name": "AT&T"
+    },
+    {
+      "name": "Atlassian"
+    },
+    {
+      "name": "Atomic Semi"
+    },
+    {
+      "name": "Atoms"
+    },
+    {
+      "name": "Auctor"
+    },
+    {
+      "name": "Audax Group"
+    },
+    {
+      "name": "Auto-Owners Insurance"
+    },
+    {
+      "name": "Autodesk"
+    },
+    {
+      "name": "Axiomatic AI"
+    },
+    {
+      "name": "BAE Systems"
+    },
+    {
+      "name": "Bank of America"
+    },
+    {
+      "name": "Bank of China USA"
+    },
+    {
+      "name": "Bank of Montreal",
+      "aliases": [
+        "BMO"
+      ]
+    },
+    {
+      "name": "Barkback"
+    },
+    {
+      "name": "Base Power"
+    },
+    {
+      "name": "Baseten"
+    },
+    {
+      "name": "Beacon Software"
+    },
+    {
+      "name": "Bee Sweet Citrus"
+    },
+    {
+      "name": "Belvedere Trading"
+    },
+    {
+      "name": "Berkshire Grey"
+    },
+    {
+      "name": "Berkshire Hathaway Energy"
+    },
+    {
+      "name": "BerryDunn"
+    },
+    {
+      "name": "Best Buy"
+    },
+    {
+      "name": "Bild AI"
+    },
+    {
+      "name": "Binance"
+    },
+    {
+      "name": "Black Box"
+    },
+    {
+      "name": "Black Cape"
+    },
+    {
+      "name": "Blackhawk Network Holdings"
+    },
+    {
+      "name": "BlackRock"
+    },
+    {
+      "name": "Blackstone"
+    },
+    {
+      "name": "Bland AI"
+    },
+    {
+      "name": "BlinqLABS"
+    },
+    {
+      "name": "Block",
+      "aliases": [
+        "Square"
+      ]
+    },
+    {
+      "name": "Blockhouse"
+    },
+    {
+      "name": "Blue Cross Blue Shield of Michigan"
+    },
+    {
+      "name": "Blue Origin"
+    },
+    {
+      "name": "BlueCross BlueShield of Nebraska"
+    },
+    {
+      "name": "BlueLabs Analytics"
+    },
+    {
+      "name": "BNY"
+    },
+    {
+      "name": "Booz Allen Hamilton",
+      "aliases": [
+        "Booz Allen"
+      ]
+    },
+    {
+      "name": "Bosch Home Comfort"
+    },
+    {
+      "name": "Boston Consulting Group",
+      "aliases": [
+        "BCG"
+      ]
+    },
+    {
+      "name": "BP"
+    },
+    {
+      "name": "Brandeis University"
+    },
+    {
+      "name": "Bree"
+    },
+    {
+      "name": "Brex"
+    },
+    {
+      "name": "BRG"
+    },
+    {
+      "name": "Brio Water Technology"
+    },
+    {
+      "name": "Brookfield"
+    },
+    {
+      "name": "Brunswick"
+    },
+    {
+      "name": "Business Insider"
+    },
+    {
+      "name": "By Light Professional IT Services"
+    },
+    {
+      "name": "ByteDance",
+      "aliases": [
+        "TikTok"
+      ]
+    },
+    {
+      "name": "C3.ai"
+    },
+    {
+      "name": "CACI"
+    },
+    {
+      "name": "Cadence Design Systems"
+    },
+    {
+      "name": "CalAmp"
+    },
+    {
+      "name": "Calpion/Plutus Health"
+    },
+    {
+      "name": "CALSTART"
+    },
+    {
+      "name": "Campbell Soup Company"
+    },
+    {
+      "name": "Canadian Solar"
+    },
+    {
+      "name": "Canadian Tire"
+    },
+    {
+      "name": "Capacity"
+    },
+    {
+      "name": "Capital One",
+      "aliases": [
+        "Capital One Financial"
+      ]
+    },
+    {
+      "name": "Carbon Engineering Ltd."
+    },
+    {
+      "name": "Cardinal Health"
+    },
+    {
+      "name": "Carnegie Mellon University"
+    },
+    {
+      "name": "Carta"
+    },
+    {
+      "name": "Castleton Commodities International"
+    },
+    {
+      "name": "Catalist"
+    },
+    {
+      "name": "Celonis"
+    },
+    {
+      "name": "Centene"
+    },
+    {
+      "name": "Centerfield"
+    },
+    {
+      "name": "Cerebras"
+    },
+    {
+      "name": "Chamberlain Group"
+    },
+    {
+      "name": "Charles Schwab",
+      "aliases": [
+        "Schwab"
+      ]
+    },
+    {
+      "name": "Chemours"
+    },
+    {
+      "name": "Chevron"
+    },
+    {
+      "name": "Chewy"
+    },
+    {
+      "name": "Chicago Trading Company"
+    },
+    {
+      "name": "CIBC"
+    },
+    {
+      "name": "Cigna Group",
+      "aliases": [
+        "Cigna"
+      ]
+    },
+    {
+      "name": "Circleback"
+    },
+    {
+      "name": "Cisco"
+    },
+    {
+      "name": "Cisive"
+    },
+    {
+      "name": "Citadel",
+      "aliases": [
+        "Citadel Securities"
+      ]
+    },
+    {
+      "name": "Citi",
+      "aliases": [
+        "Citigroup",
+        "Citibank"
+      ]
+    },
+    {
+      "name": "City of Baltimore"
+    },
+    {
+      "name": "City of Manhattan Kansas"
+    },
+    {
+      "name": "Clarios"
+    },
+    {
+      "name": "Clerkie"
+    },
+    {
+      "name": "Clinical Ink"
+    },
+    {
+      "name": "CloudFit Software"
+    },
+    {
+      "name": "Cloudflare"
+    },
+    {
+      "name": "Cloudforce"
+    },
+    {
+      "name": "Clyde Companies"
+    },
+    {
+      "name": "CNO Financial Group"
+    },
+    {
+      "name": "Codeage"
+    },
+    {
+      "name": "Cohere"
+    },
+    {
+      "name": "Coinbase"
+    },
+    {
+      "name": "Cole Engineering Services"
+    },
+    {
+      "name": "Comcast"
+    },
+    {
+      "name": "Commerce Bank"
+    },
+    {
+      "name": "Commercial Metals"
+    },
+    {
+      "name": "Compeer Financial"
+    },
+    {
+      "name": "Composio"
+    },
+    {
+      "name": "Concentric"
+    },
+    {
+      "name": "Conduent"
+    },
+    {
+      "name": "Confluent"
+    },
+    {
+      "name": "ConnectPrep"
+    },
+    {
+      "name": "ConocoPhillips"
+    },
+    {
+      "name": "Continental Resources"
+    },
+    {
+      "name": "Cooper Companies"
+    },
+    {
+      "name": "Copart"
+    },
+    {
+      "name": "Core & Main"
+    },
+    {
+      "name": "Corning"
+    },
+    {
+      "name": "Corpay"
+    },
+    {
+      "name": "Costco",
+      "aliases": [
+        "Costco Wholesale"
+      ]
+    },
+    {
+      "name": "Cotiviti"
+    },
+    {
+      "name": "Creatify Lab "
+    },
+    {
+      "name": "Cresta"
+    },
+    {
+      "name": "Crowe"
+    },
+    {
+      "name": "CSX"
+    },
+    {
+      "name": "CTGT"
+    },
+    {
+      "name": "CuspAI"
+    },
+    {
+      "name": "Customers Bank"
+    },
+    {
+      "name": "Cvent"
+    },
+    {
+      "name": "CVS Health",
+      "aliases": [
+        "CVS"
+      ]
+    },
+    {
+      "name": "Cybernetic Labs"
+    },
+    {
+      "name": "D.E. Shaw",
+      "aliases": [
+        "DE Shaw",
+        "D. E. Shaw"
+      ]
+    },
+    {
+      "name": "Daktronics"
+    },
+    {
+      "name": "Dallas College"
+    },
+    {
+      "name": "Databricks"
+    },
+    {
+      "name": "Datadog"
+    },
+    {
+      "name": "Dayshape"
+    },
+    {
+      "name": "Dedalus Labs"
+    },
+    {
+      "name": "Dee Zee"
+    },
+    {
+      "name": "Deel"
+    },
+    {
+      "name": "Deepgram"
+    },
+    {
+      "name": "Deloitte"
+    },
+    {
+      "name": "Delta Air Lines",
+      "aliases": [
+        "Delta"
+      ]
+    },
+    {
+      "name": "Delta Dental"
+    },
+    {
+      "name": "Denari"
+    },
+    {
+      "name": "Deutsche Bank"
+    },
+    {
+      "name": "Devon Energy"
+    },
+    {
+      "name": "Dexmate"
+    },
+    {
+      "name": "Diamondback Energy"
+    },
+    {
+      "name": "Dimensional Fund Advisors"
+    },
+    {
+      "name": "Discord"
+    },
+    {
+      "name": "Dmg Media"
+    },
+    {
+      "name": "Doctors Without Borders"
+    },
+    {
+      "name": "Docugami"
+    },
+    {
+      "name": "DocuSign"
+    },
+    {
+      "name": "DoorDash"
+    },
+    {
+      "name": "Dow Chemical Company"
+    },
+    {
+      "name": "DP World"
+    },
+    {
+      "name": "DraftKings"
+    },
+    {
+      "name": "Dropbox"
+    },
+    {
+      "name": "Droyd Robotics"
+    },
+    {
+      "name": "DRW"
+    },
+    {
+      "name": "Dryft"
+    },
+    {
+      "name": "DTCC"
+    },
+    {
+      "name": "DuCharme, McMillen & Associates"
+    },
+    {
+      "name": "Duolingo"
+    },
+    {
+      "name": "DV Trading",
+      "aliases": [
+        "DV Group"
+      ]
+    },
+    {
+      "name": "e-Careers"
+    },
+    {
+      "name": "East Penn Manufacturing Company"
+    },
+    {
+      "name": "Eaton"
+    },
+    {
+      "name": "eBay"
+    },
+    {
+      "name": "Ecolab"
+    },
+    {
+      "name": "Edison International"
+    },
+    {
+      "name": "Egra"
+    },
+    {
+      "name": "Elastic"
+    },
+    {
+      "name": "Electronic Arts",
+      "aliases": [
+        "EA"
+      ]
+    },
+    {
+      "name": "Elk Valley Resources"
+    },
+    {
+      "name": "Ellipsis Labs"
+    },
+    {
+      "name": "Eluvio"
+    },
+    {
+      "name": "Emerging Tech"
+    },
+    {
+      "name": "Emerson Electric"
+    },
+    {
+      "name": "Emory University"
+    },
+    {
+      "name": "Empirical Foods"
+    },
+    {
+      "name": "Encephalo Investments"
+    },
+    {
+      "name": "Engineers and Geoscientists BC"
+    },
+    {
+      "name": "Ensemble Health Partners"
+    },
+    {
+      "name": "Epic Games"
+    },
+    {
+      "name": "EPRI"
+    },
+    {
+      "name": "Equifax"
+    },
+    {
+      "name": "EquipmentShare"
+    },
+    {
+      "name": "Eragon"
+    },
+    {
+      "name": "Espa AI"
+    },
+    {
+      "name": "Etched"
+    },
+    {
+      "name": "ETHGlobal"
+    },
+    {
+      "name": "Etsy"
+    },
+    {
+      "name": "Eudia"
+    },
+    {
+      "name": "Eulerity"
+    },
+    {
+      "name": "Eurofins"
+    },
+    {
+      "name": "EV Realty"
+    },
+    {
+      "name": "Eversource Energy"
+    },
+    {
+      "name": "Everstream Analytics"
+    },
+    {
+      "name": "Evolver"
+    },
+    {
+      "name": "Exa"
+    },
+    {
+      "name": "Exa Labs"
+    },
+    {
+      "name": "Excellus BCBS"
+    },
+    {
+      "name": "Exelon"
+    },
+    {
+      "name": "Expedia Group",
+      "aliases": [
+        "Expedia"
+      ]
+    },
+    {
+      "name": "fab2"
+    },
+    {
+      "name": "Facility Solutions Group"
+    },
+    {
+      "name": "Faire"
+    },
+    {
+      "name": "Fanatics"
+    },
+    {
+      "name": "Fannie Mae"
+    },
+    {
+      "name": "FAST Enterprises"
+    },
+    {
+      "name": "Felix Magazine"
+    },
+    {
+      "name": "Fidelity Investments",
+      "aliases": [
+        "Fidelity"
+      ]
+    },
+    {
+      "name": "Fifth Third Bank"
+    },
+    {
+      "name": "Figma"
+    },
+    {
+      "name": "Filtration Group"
+    },
+    {
+      "name": "Firetiger"
+    },
+    {
+      "name": "First Bank & Trust"
+    },
+    {
+      "name": "First National Bank"
+    },
+    {
+      "name": "First Quality"
+    },
+    {
+      "name": "Five Rings Capital"
+    },
+    {
+      "name": "Flagright"
+    },
+    {
+      "name": "Flexport"
+    },
+    {
+      "name": "Forus"
+    },
+    {
+      "name": "Foundation Finance"
+    },
+    {
+      "name": "Four Hands"
+    },
+    {
+      "name": "Framatome"
+    },
+    {
+      "name": "Freddie Mac"
+    },
+    {
+      "name": "Freeform"
+    },
+    {
+      "name": "Frontier Health"
+    },
+    {
+      "name": "FTI Consulting"
+    },
+    {
+      "name": "Fullbay"
+    },
+    {
+      "name": "Fundwell"
+    },
+    {
+      "name": "Fussball Club Cincinnati LLC (“FC Cincinnati”)"
+    },
+    {
+      "name": "G-Research"
+    },
+    {
+      "name": "Garda Capital Partners"
+    },
+    {
+      "name": "Gartner"
+    },
+    {
+      "name": "GCI"
+    },
+    {
+      "name": "GE Aerospace"
+    },
+    {
+      "name": "GE Appliances"
+    },
+    {
+      "name": "GE Healthcare"
+    },
+    {
+      "name": "GE Vernova"
+    },
+    {
+      "name": "GEICO"
+    },
+    {
+      "name": "Geisinger"
+    },
+    {
+      "name": "Genentech"
+    },
+    {
+      "name": "General Dynamics"
+    },
+    {
+      "name": "General Intuition &amp; Medal"
+    },
+    {
+      "name": "General Motors",
+      "aliases": [
+        "GM"
+      ]
+    },
+    {
+      "name": "Generation West Virginia"
+    },
+    {
+      "name": "Geneva Trading"
+    },
+    {
+      "name": "GenMD"
+    },
+    {
+      "name": "Gensyn"
+    },
+    {
+      "name": "Genworth Financial"
+    },
+    {
+      "name": "Geo Owl"
+    },
+    {
+      "name": "Georgian Partners Growth"
+    },
+    {
+      "name": "GitLab"
+    },
+    {
+      "name": "GlossGenius"
+    },
+    {
+      "name": "Goldman Sachs"
+    },
+    {
+      "name": "Google",
+      "aliases": [
+        "Alphabet"
+      ]
+    },
+    {
+      "name": "Grafana Labs"
+    },
+    {
+      "name": "Grant Thornton"
+    },
+    {
+      "name": "Grass Valley"
+    },
+    {
+      "name": "Gritt Robotics Inc"
+    },
+    {
+      "name": "Groq"
+    },
+    {
+      "name": "GSK"
+    },
+    {
+      "name": "GuideWell Mutual"
+    },
+    {
+      "name": "Gulfstream"
+    },
+    {
+      "name": "Gusto"
+    },
+    {
+      "name": "Haize Labs"
+    },
+    {
+      "name": "HARMAN"
+    },
+    {
+      "name": "HashiCorp"
+    },
+    {
+      "name": "HCompany"
+    },
+    {
+      "name": "Heliux"
+    },
+    {
+      "name": "Helsing"
+    },
+    {
+      "name": "Hermeus"
+    },
+    {
+      "name": "Hewlett Packard",
+      "aliases": [
+        "HP"
+      ]
+    },
+    {
+      "name": "HEXAWARE"
+    },
+    {
+      "name": "Hiebing"
+    },
+    {
+      "name": "Hilton Worldwide"
+    },
+    {
+      "name": "Hippocratic AI"
+    },
+    {
+      "name": "Hitachi"
+    },
+    {
+      "name": "Hiverge"
+    },
+    {
+      "name": "HNTB"
+    },
+    {
+      "name": "Hoffman Construction"
+    },
+    {
+      "name": "Home Depot",
+      "aliases": [
+        "The Home Depot"
+      ]
+    },
+    {
+      "name": "Hone Health"
+    },
+    {
+      "name": "Honeywell"
+    },
+    {
+      "name": "Howard University"
+    },
+    {
+      "name": "Howmet Aerospace"
+    },
+    {
+      "name": "HP IQ"
+    },
+    {
+      "name": "HPR (Hyannis Port Research)"
+    },
+    {
+      "name": "Hubs.is"
+    },
+    {
+      "name": "HubSpot"
+    },
+    {
+      "name": "Huck Adventures"
+    },
+    {
+      "name": "Hudson River Trading"
+    },
+    {
+      "name": "Human Computer Lab"
+    },
+    {
+      "name": "Humana"
+    },
+    {
+      "name": "Hunt Oil Company"
+    },
+    {
+      "name": "Huntington Bancshares"
+    },
+    {
+      "name": "Hypercubic"
+    },
+    {
+      "name": "HyperLight"
+    },
+    {
+      "name": "IAT Insurance Group"
+    },
+    {
+      "name": "Iberdrola Group"
+    },
+    {
+      "name": "IBM"
+    },
+    {
+      "name": "iFLIP4"
+    },
+    {
+      "name": "IGS Energy"
+    },
+    {
+      "name": "iHeartMedia"
+    },
+    {
+      "name": "Illinois Tool Works"
+    },
+    {
+      "name": "IMC Trading",
+      "aliases": [
+        "IMC"
+      ]
+    },
+    {
+      "name": "IMEG"
+    },
+    {
+      "name": "Inbulks"
+    },
+    {
+      "name": "Incident IQ"
+    },
+    {
+      "name": "Infojini"
+    },
+    {
+      "name": "Ingredion"
+    },
+    {
+      "name": "Instacart"
+    },
+    {
+      "name": "InstaLILY"
+    },
+    {
+      "name": "Instead"
+    },
+    {
+      "name": "Institute of Foundation Models"
+    },
+    {
+      "name": "Integra FEC"
+    },
+    {
+      "name": "Intel"
+    },
+    {
+      "name": "Intelcom | Dragonfly"
+    },
+    {
+      "name": "IntelliGenesis"
+    },
+    {
+      "name": "Interco"
+    },
+    {
+      "name": "Intercontinental Exchange, Inc.",
+      "aliases": [
+        "ICE",
+        "Intercontinental Exchange"
+      ]
+    },
+    {
+      "name": "Interdigital"
+    },
+    {
+      "name": "International Rescue Committee (IRC)"
+    },
+    {
+      "name": "Internship"
+    },
+    {
+      "name": "Intropic"
+    },
+    {
+      "name": "Intuit"
+    },
+    {
+      "name": "Intuitive Surgical"
+    },
+    {
+      "name": "ISN Software"
+    },
+    {
+      "name": "ITT"
+    },
+    {
+      "name": "Jade Global"
+    },
+    {
+      "name": "Jane Street"
+    },
+    {
+      "name": "Jobs for Humanity"
+    },
+    {
+      "name": "John Deere"
+    },
+    {
+      "name": "Johns Hopkins Applied Physics Laboratory"
+    },
+    {
+      "name": "Johns Manville"
+    },
+    {
+      "name": "Johnson & Johnson",
+      "aliases": [
+        "J&J"
+      ]
+    },
+    {
+      "name": "JPMorgan Chase",
+      "aliases": [
+        "JPMorgan",
+        "JP Morgan",
+        "JP Morgan Chase",
+        "JPMorganChase",
+        "Chase"
+      ]
+    },
+    {
+      "name": "Jump Trading",
+      "aliases": [
+        "Jump Trading Group"
+      ]
+    },
+    {
+      "name": "Junior AI"
+    },
+    {
+      "name": "k-ID"
+    },
+    {
+      "name": "K1"
+    },
+    {
+      "name": "Kastle"
+    },
+    {
+      "name": "Kastle AI"
+    },
+    {
+      "name": "KeyBank"
+    },
+    {
+      "name": "Keysight Technologies"
+    },
+    {
+      "name": "Kinder Morgan"
+    },
+    {
+      "name": "KLA"
+    },
+    {
+      "name": "Koch Industries"
+    },
+    {
+      "name": "Kodiak Robotics"
+    },
+    {
+      "name": "Kognitos"
+    },
+    {
+      "name": "KPMG"
+    },
+    {
+      "name": "Kroger"
+    },
+    {
+      "name": "L3Harris Technologies",
+      "aliases": [
+        "L3Harris"
+      ]
+    },
+    {
+      "name": "Later"
+    },
+    {
+      "name": "Lawrence Berkeley National Laboratory"
+    },
+    {
+      "name": "Lawrence Livermore National Laboratory",
+      "aliases": [
+        "LLNL"
+      ]
+    },
+    {
+      "name": "LAXIR"
+    },
+    {
+      "name": "Léger"
+    },
+    {
+      "name": "Leidos"
+    },
+    {
+      "name": "Leland"
+    },
+    {
+      "name": "Lennox International"
+    },
+    {
+      "name": "Levi Strauss & Co.",
+      "aliases": [
+        "Levi's"
+      ]
+    },
+    {
+      "name": "Liberty Mutual"
+    },
+    {
+      "name": "Liberty University"
+    },
+    {
+      "name": "Lightcast"
+    },
+    {
+      "name": "LightGuide, Inc."
+    },
+    {
+      "name": "Lila Sciences"
+    },
+    {
+      "name": "LinkedIn"
+    },
+    {
+      "name": "Lockheed Martin"
+    },
+    {
+      "name": "Louisiana Blue"
+    },
+    {
+      "name": "Louisiana State University (LSU)"
+    },
+    {
+      "name": "Lowe's",
+      "aliases": [
+        "Lowes"
+      ]
+    },
+    {
+      "name": "LPL Financial Holdings",
+      "aliases": [
+        "LPL Financial"
+      ]
+    },
+    {
+      "name": "Luminance"
+    },
+    {
+      "name": "Lyft"
+    },
+    {
+      "name": "Mackenzie Investments"
+    },
+    {
+      "name": "Macy's"
+    },
+    {
+      "name": "Magna"
+    },
+    {
+      "name": "Major League Baseball"
+    },
+    {
+      "name": "Manulife Financial"
+    },
+    {
+      "name": "Mapjects"
+    },
+    {
+      "name": "Markem-Imaje"
+    },
+    {
+      "name": "Marmon Holdings"
+    },
+    {
+      "name": "Marsh"
+    },
+    {
+      "name": "Marshall Wace"
+    },
+    {
+      "name": "Marvell"
+    },
+    {
+      "name": "Mass General Brigham"
+    },
+    {
+      "name": "Mastercard"
+    },
+    {
+      "name": "Maven Securities"
+    },
+    {
+      "name": "Maxima"
+    },
+    {
+      "name": "Maximor AI"
+    },
+    {
+      "name": "Maxinsights"
+    },
+    {
+      "name": "McGill University"
+    },
+    {
+      "name": "McKesson"
+    },
+    {
+      "name": "Medical Informatics Engineering"
+    },
+    {
+      "name": "Medline"
+    },
+    {
+      "name": "Medpace, Inc."
+    },
+    {
+      "name": "Medtronic"
+    },
+    {
+      "name": "Melius"
+    },
+    {
+      "name": "Menasha Corporation"
+    },
+    {
+      "name": "Merchants Bank of Indiana"
+    },
+    {
+      "name": "Meridian Partners"
+    },
+    {
+      "name": "Meshy"
+    },
+    {
+      "name": "Meta",
+      "aliases": [
+        "Facebook",
+        "Meta Platforms"
+      ]
+    },
+    {
+      "name": "METECS"
+    },
+    {
+      "name": "MetLife"
+    },
+    {
+      "name": "Miami University"
+    },
+    {
+      "name": "Michael Baker International"
+    },
+    {
+      "name": "Michelin"
+    },
+    {
+      "name": "Microchip Technology"
+    },
+    {
+      "name": "Micron Technology",
+      "aliases": [
+        "Micron"
+      ]
+    },
+    {
+      "name": "Microsoft"
+    },
+    {
+      "name": "Millennium"
+    },
+    {
+      "name": "Mindsmith"
+    },
+    {
+      "name": "Mistral AI",
+      "aliases": [
+        "Mistral"
+      ]
+    },
+    {
+      "name": "Mizuho Securities USA",
+      "aliases": [
+        "Mizuho"
+      ]
+    },
+    {
+      "name": "MKS Instruments"
+    },
+    {
+      "name": "Mobius Renewables"
+    },
+    {
+      "name": "Modal"
+    },
+    {
+      "name": "Momentive"
+    },
+    {
+      "name": "MongoDB"
+    },
+    {
+      "name": "Monolithic Power Systems"
+    },
+    {
+      "name": "Montenson"
+    },
+    {
+      "name": "Montgomery Investment Technology, Inc."
+    },
+    {
+      "name": "Moon"
+    },
+    {
+      "name": "Morgan Stanley"
+    },
+    {
+      "name": "Mosaic"
+    },
+    {
+      "name": "Motorola",
+      "aliases": [
+        "Motorola Solutions"
+      ]
+    },
+    {
+      "name": "MPR Associates"
+    },
+    {
+      "name": "Mujin"
+    },
+    {
+      "name": "Multiply Labs"
+    },
+    {
+      "name": "Muru"
+    },
+    {
+      "name": "MyEmployment"
+    },
+    {
+      "name": "Naïve"
+    },
+    {
+      "name": "Nash"
+    },
+    {
+      "name": "National Laboratory of the Rockies"
+    },
+    {
+      "name": "NationGraph"
+    },
+    {
+      "name": "Nationwide"
+    },
+    {
+      "name": "Navy Federal",
+      "aliases": [
+        "Navy Federal Credit Union"
+      ]
+    },
+    {
+      "name": "NBCUniversal"
+    },
+    {
+      "name": "Nebo"
+    },
+    {
+      "name": "NeoCognition"
+    },
+    {
+      "name": "Netflix"
+    },
+    {
+      "name": "Netic"
+    },
+    {
+      "name": "Neuralink"
+    },
+    {
+      "name": "Newrez"
+    },
+    {
+      "name": "NewsBreak"
+    },
+    {
+      "name": "Nexstar"
+    },
+    {
+      "name": "Nextiva"
+    },
+    {
+      "name": "Nike"
+    },
+    {
+      "name": "Nio"
+    },
+    {
+      "name": "NiSource"
+    },
+    {
+      "name": "Niural"
+    },
+    {
+      "name": "NJM Insurance Group"
+    },
+    {
+      "name": "Nokia"
+    },
+    {
+      "name": "Nordstrom"
+    },
+    {
+      "name": "North Atlantic Industries"
+    },
+    {
+      "name": "Northeastern University"
+    },
+    {
+      "name": "Northern Trust"
+    },
+    {
+      "name": "Northrop Grumman"
+    },
+    {
+      "name": "Northwestern Mutual"
+    },
+    {
+      "name": "Northwood Space"
+    },
+    {
+      "name": "Notion"
+    },
+    {
+      "name": "Novanta"
+    },
+    {
+      "name": "Novogradac"
+    },
+    {
+      "name": "Nvidia"
+    },
+    {
+      "name": "NXP Semiconductors"
+    },
+    {
+      "name": "Obsidian Solutions Group"
+    },
+    {
+      "name": "Occidental Petroleum",
+      "aliases": [
+        "Oxy"
+      ]
+    },
+    {
+      "name": "Ohio State University"
+    },
+    {
+      "name": "Old Mission"
+    },
+    {
+      "name": "Oligo Space"
+    },
+    {
+      "name": "Omnis"
+    },
+    {
+      "name": "ONEOK"
+    },
+    {
+      "name": "onsemi"
+    },
+    {
+      "name": "Ontario Teachers' Pension Plan"
+    },
+    {
+      "name": "Onware"
+    },
+    {
+      "name": "Open Road Integrated Media"
+    },
+    {
+      "name": "OpenAI"
+    },
+    {
+      "name": "Optiver"
+    },
+    {
+      "name": "OpusClip"
+    },
+    {
+      "name": "Oracle"
+    },
+    {
+      "name": "Orennia"
+    },
+    {
+      "name": "Oshkosh"
+    },
+    {
+      "name": "Output Biosciences"
+    },
+    {
+      "name": "PagerDuty"
+    },
+    {
+      "name": "Palantir",
+      "aliases": [
+        "Palantir Technologies"
+      ]
+    },
+    {
+      "name": "Palo Alto Networks"
+    },
+    {
+      "name": "Panasonic Holdings"
+    },
+    {
+      "name": "Parsons"
+    },
+    {
+      "name": "PathAI"
+    },
+    {
+      "name": "PayPal"
+    },
+    {
+      "name": "PDT Partners"
+    },
+    {
+      "name": "Pella"
+    },
+    {
+      "name": "PennState University"
+    },
+    {
+      "name": "Pennsylvania State University"
+    },
+    {
+      "name": "Penta Group"
+    },
+    {
+      "name": "Pentair"
+    },
+    {
+      "name": "Perpay"
+    },
+    {
+      "name": "Perplexity AI",
+      "aliases": [
+        "Perplexity"
+      ]
+    },
+    {
+      "name": "Persona AI"
+    },
+    {
+      "name": "PGIM"
+    },
+    {
+      "name": "Philips"
+    },
+    {
+      "name": "Phoebe"
+    },
+    {
+      "name": "Phoenix Contact"
+    },
+    {
+      "name": "Phonely"
+    },
+    {
+      "name": "Phonic"
+    },
+    {
+      "name": "PIMCO"
+    },
+    {
+      "name": "Pinterest"
+    },
+    {
+      "name": "Pivot Robotics"
+    },
+    {
+      "name": "Plaid"
+    },
+    {
+      "name": "PNC Financial Services",
+      "aliases": [
+        "PNC"
+      ]
+    },
+    {
+      "name": "POET"
+    },
+    {
+      "name": "Polaris"
+    },
+    {
+      "name": "Pony.ai"
+    },
+    {
+      "name": "Poshmark"
+    },
+    {
+      "name": "Post Holdings"
+    },
+    {
+      "name": "Postman"
+    },
+    {
+      "name": "Praytell"
+    },
+    {
+      "name": "PricewaterhouseCoopers",
+      "aliases": [
+        "PwC"
+      ]
+    },
+    {
+      "name": "PricewaterhouseCoopers",
+      "aliases": [
+        "PwC"
+      ]
+    },
+    {
+      "name": "Primetals Technologies"
+    },
+    {
+      "name": "Procter & Gamble",
+      "aliases": [
+        "P&G"
+      ]
+    },
+    {
+      "name": "Progressive"
+    },
+    {
+      "name": "ProNexus"
+    },
+    {
+      "name": "Prospect Equities"
+    },
+    {
+      "name": "Protiviti"
+    },
+    {
+      "name": "Prudential"
+    },
+    {
+      "name": "Prudential Financial"
+    },
+    {
+      "name": "PSECU"
+    },
+    {
+      "name": "PSP Investments"
+    },
+    {
+      "name": "Pylon"
+    },
+    {
+      "name": "Qorvo"
+    },
+    {
+      "name": "Quadrillion"
+    },
+    {
+      "name": "Quadrillion Labs"
+    },
+    {
+      "name": "Qualcomm"
+    },
+    {
+      "name": "Quantbot Technologies"
+    },
+    {
+      "name": "QuEra Computing"
+    },
+    {
+      "name": "Ragle Inc"
+    },
+    {
+      "name": "Rainmaker"
+    },
+    {
+      "name": "Ramp"
+    },
+    {
+      "name": "RapDev"
+    },
+    {
+      "name": "Realm"
+    },
+    {
+      "name": "Red Bull"
+    },
+    {
+      "name": "Reddit"
+    },
+    {
+      "name": "RegDesk"
+    },
+    {
+      "name": "Regions Bank"
+    },
+    {
+      "name": "Remarcable"
+    },
+    {
+      "name": "Rendezvous Robotics"
+    },
+    {
+      "name": "Replit"
+    },
+    {
+      "name": "Repsol"
+    },
+    {
+      "name": "RESPEC"
+    },
+    {
+      "name": "ResponsiveAds"
+    },
+    {
+      "name": "Revvity"
+    },
+    {
+      "name": "Reyes Beverage Group"
+    },
+    {
+      "name": "RFCUNY"
+    },
+    {
+      "name": "Riot Games"
+    },
+    {
+      "name": "Rippling"
+    },
+    {
+      "name": "Rivet Industries"
+    },
+    {
+      "name": "Rivian",
+      "aliases": [
+        "Rivian and Volkswagen Group Technologies"
+      ]
+    },
+    {
+      "name": "RJ Lee Group"
+    },
+    {
+      "name": "Roam"
+    },
+    {
+      "name": "Robert Bosch LLC"
+    },
+    {
+      "name": "Robert Bosch Venture Capital"
+    },
+    {
+      "name": "Robinhood"
+    },
+    {
+      "name": "Roblox"
+    },
+    {
+      "name": "ROCKWOOL Group"
+    },
+    {
+      "name": "Royal Bank of Canada",
+      "aliases": [
+        "RBC"
+      ]
+    },
+    {
+      "name": "RRS Group"
+    },
+    {
+      "name": "RTX",
+      "aliases": [
+        "Raytheon"
+      ]
+    },
+    {
+      "name": "Ryan Companies"
+    },
+    {
+      "name": "Rystad Energy"
+    },
+    {
+      "name": "S&B Engineers and Constructors"
+    },
+    {
+      "name": "Sabre Systems"
+    },
+    {
+      "name": "Sage"
+    },
+    {
+      "name": "SAIC"
+    },
+    {
+      "name": "Saint Leo University"
+    },
+    {
+      "name": "Salesforce"
+    },
+    {
+      "name": "Samsara"
+    },
+    {
+      "name": "Samsung",
+      "aliases": [
+        "Samsung Research America"
+      ]
+    },
+    {
+      "name": "Sandhills Global"
+    },
+    {
+      "name": "SAP"
+    },
+    {
+      "name": "Savannah River National Laboratory"
+    },
+    {
+      "name": "Scale AI"
+    },
+    {
+      "name": "SchoolMint"
+    },
+    {
+      "name": "Schroders"
+    },
+    {
+      "name": "Schweitzer Engineering Laboratories"
+    },
+    {
+      "name": "SciTec"
+    },
+    {
+      "name": "SCOR"
+    },
+    {
+      "name": "SDSU Research Foundation"
+    },
+    {
+      "name": "Serval"
+    },
+    {
+      "name": "ServiceNow"
+    },
+    {
+      "name": "Seven Research"
+    },
+    {
+      "name": "Sezzle"
+    },
+    {
+      "name": "SHEIN"
+    },
+    {
+      "name": "Sherwin-Williams"
+    },
+    {
+      "name": "Shopify"
+    },
+    {
+      "name": "ShyftLabs"
+    },
+    {
+      "name": "Sierra"
+    },
+    {
+      "name": "SiFive"
+    },
+    {
+      "name": "SightCall"
+    },
+    {
+      "name": "SimIS"
+    },
+    {
+      "name": "SimonComputing"
+    },
+    {
+      "name": "Sixtyfour (X25)"
+    },
+    {
+      "name": "SK Hynix Memory Solution"
+    },
+    {
+      "name": "Skydio"
+    },
+    {
+      "name": "Slack"
+    },
+    {
+      "name": "Smiths Detection"
+    },
+    {
+      "name": "Snap",
+      "aliases": [
+        "Snapchat"
+      ]
+    },
+    {
+      "name": "Snowflake"
+    },
+    {
+      "name": "Solar Turbines"
+    },
+    {
+      "name": "Solid Power"
+    },
+    {
+      "name": "SoloPulse"
+    },
+    {
+      "name": "Somerce"
+    },
+    {
+      "name": "Sony"
+    },
+    {
+      "name": "SOTI"
+    },
+    {
+      "name": "Southern Star Central Gas Pipeline"
+    },
+    {
+      "name": "Southwest Airlines"
+    },
+    {
+      "name": "Space Dynamics Laboratory"
+    },
+    {
+      "name": "SpaceX"
+    },
+    {
+      "name": "Spacial AI"
+    },
+    {
+      "name": "Specialisterne"
+    },
+    {
+      "name": "Specter Aerospace"
+    },
+    {
+      "name": "Spotify"
+    },
+    {
+      "name": "SpreeAI "
+    },
+    {
+      "name": "Springs Window Fashions"
+    },
+    {
+      "name": "Squarepoint Capital"
+    },
+    {
+      "name": "Squarespace"
+    },
+    {
+      "name": "StarSling"
+    },
+    {
+      "name": "State Farm"
+    },
+    {
+      "name": "Stellar Science"
+    },
+    {
+      "name": "Steven's Capital Management"
+    },
+    {
+      "name": "Stoke Space"
+    },
+    {
+      "name": "Stripe"
+    },
+    {
+      "name": "Stryker"
+    },
+    {
+      "name": "StudyFetch"
+    },
+    {
+      "name": "Sun Life"
+    },
+    {
+      "name": "Suncor"
+    },
+    {
+      "name": "Super"
+    },
+    {
+      "name": "Susquehanna",
+      "aliases": [
+        "SIG",
+        "Susquehanna International Group",
+        "Susquehanna International Group (SIG)"
+      ]
+    },
+    {
+      "name": "Sweatpals"
+    },
+    {
+      "name": "Swift"
+    },
+    {
+      "name": "Synchrony Financial",
+      "aliases": [
+        "Synchrony"
+      ]
+    },
+    {
+      "name": "Syngenta Group"
+    },
+    {
+      "name": "Sysco"
+    },
+    {
+      "name": "Syska Hennessy Group"
+    },
+    {
+      "name": "T-Mobile"
+    },
+    {
+      "name": "Target",
+      "aliases": [
+        "Target Corporation"
+      ]
+    },
+    {
+      "name": "Tarrant Regional Water District"
+    },
+    {
+      "name": "TC Energy"
+    },
+    {
+      "name": "TD Bank"
+    },
+    {
+      "name": "TechInsights"
+    },
+    {
+      "name": "Techtronic Industries"
+    },
+    {
+      "name": "Teledyne"
+    },
+    {
+      "name": "Teledyne Technologies Incorporated"
+    },
+    {
+      "name": "TELUS Digital"
+    },
+    {
+      "name": "Tencent"
+    },
+    {
+      "name": "Tenstorrent"
+    },
+    {
+      "name": "Terranova"
+    },
+    {
+      "name": "Tesla"
+    },
+    {
+      "name": "Tessera Labs"
+    },
+    {
+      "name": "TETRAMEM"
+    },
+    {
+      "name": "Texas A&M International University"
+    },
+    {
+      "name": "Texas Instruments"
+    },
+    {
+      "name": "Textron"
+    },
+    {
+      "name": "The Boeing Company",
+      "aliases": [
+        "Boeing"
+      ]
+    },
+    {
+      "name": "The Browser Company"
+    },
+    {
+      "name": "The Campbell's Company"
+    },
+    {
+      "name": "The Federal Reserve System"
+    },
+    {
+      "name": "The Hartford"
+    },
+    {
+      "name": "The Nuclear Company"
+    },
+    {
+      "name": "The Trade Desk"
+    },
+    {
+      "name": "The Voleon Group"
+    },
+    {
+      "name": "The Walt Disney Company",
+      "aliases": [
+        "Disney"
+      ]
+    },
+    {
+      "name": "The Wharton School"
+    },
+    {
+      "name": "Thea Energy"
+    },
+    {
+      "name": "Thermo Fisher Scientific",
+      "aliases": [
+        "Thermo Fisher"
+      ]
+    },
+    {
+      "name": "Thingtrax"
+    },
+    {
+      "name": "Thomson Reuters"
+    },
+    {
+      "name": "thyssenkrupp"
+    },
+    {
+      "name": "TIAA"
+    },
+    {
+      "name": "TIFIN"
+    },
+    {
+      "name": "Tilde Research"
+    },
+    {
+      "name": "TJX",
+      "aliases": [
+        "TJX Companies"
+      ]
+    },
+    {
+      "name": "TMEIC"
+    },
+    {
+      "name": "TMEIC Corporation Americas"
+    },
+    {
+      "name": "Toast"
+    },
+    {
+      "name": "Together AI"
+    },
+    {
+      "name": "Toyota Research Institute"
+    },
+    {
+      "name": "Tradeweb"
+    },
+    {
+      "name": "Trane Technologies"
+    },
+    {
+      "name": "TransMarket Group"
+    },
+    {
+      "name": "Travelers"
+    },
+    {
+      "name": "Trend Micro"
+    },
+    {
+      "name": "TribalScale"
+    },
+    {
+      "name": "TRUMPF"
+    },
+    {
+      "name": "Truveta"
+    },
+    {
+      "name": "Tuckernuck"
+    },
+    {
+      "name": "Turabify"
+    },
+    {
+      "name": "TWG Global"
+    },
+    {
+      "name": "Twilio"
+    },
+    {
+      "name": "Two Sigma"
+    },
+    {
+      "name": "Two Six Technologies"
+    },
+    {
+      "name": "U.S. Venture"
+    },
+    {
+      "name": "Uber",
+      "aliases": [
+        "Uber Technologies"
+      ]
+    },
+    {
+      "name": "UHY"
+    },
+    {
+      "name": "Uline"
+    },
+    {
+      "name": "Ulta Beauty",
+      "aliases": [
+        "Ulta"
+      ]
+    },
+    {
+      "name": "UMB"
+    },
+    {
+      "name": "Uncountable"
+    },
+    {
+      "name": "Unify"
+    },
+    {
+      "name": "United Airlines"
+    },
+    {
+      "name": "United Parcel Service"
+    },
+    {
+      "name": "Unity",
+      "aliases": [
+        "Unity Technologies"
+      ]
+    },
+    {
+      "name": "University Health Network"
+    },
+    {
+      "name": "University of Arkansas"
+    },
+    {
+      "name": "University of Nevada, Reno"
+    },
+    {
+      "name": "University of Pikeville"
+    },
+    {
+      "name": "University of St. Thomas"
+    },
+    {
+      "name": "University of Texas at Austin"
+    },
+    {
+      "name": "University of Virginia"
+    },
+    {
+      "name": "University System of New Hampshire"
+    },
+    {
+      "name": "Upbring"
+    },
+    {
+      "name": "Urban Science"
+    },
+    {
+      "name": "Valstad"
+    },
+    {
+      "name": "Vanguard"
+    },
+    {
+      "name": "Varda Space"
+    },
+    {
+      "name": "Veeva",
+      "aliases": [
+        "Veeva Systems"
+      ]
+    },
+    {
+      "name": "Vendelux"
+    },
+    {
+      "name": "Vercel"
+    },
+    {
+      "name": "Verdantas"
+    },
+    {
+      "name": "Verisk"
+    },
+    {
+      "name": "Verition Fund Management"
+    },
+    {
+      "name": "Verizon"
+    },
+    {
+      "name": "Verkada"
+    },
+    {
+      "name": "Vermeer"
+    },
+    {
+      "name": "Vertiv"
+    },
+    {
+      "name": "VetsEZ"
+    },
+    {
+      "name": "Viridien"
+    },
+    {
+      "name": "Virtu Financial"
+    },
+    {
+      "name": "Visa"
+    },
+    {
+      "name": "Vital Lyfe"
+    },
+    {
+      "name": "Vitalant"
+    },
+    {
+      "name": "VMware"
+    },
+    {
+      "name": "W.W. Grainger",
+      "aliases": [
+        "Grainger"
+      ]
+    },
+    {
+      "name": "Walgreens",
+      "aliases": [
+        "Walgreens Boots Alliance"
+      ]
+    },
+    {
+      "name": "Walmart",
+      "aliases": [
+        "Walmart Global Tech"
+      ]
+    },
+    {
+      "name": "Wayfair"
+    },
+    {
+      "name": "Waymo"
+    },
+    {
+      "name": "Wealthsimple"
+    },
+    {
+      "name": "Weave"
+    },
+    {
+      "name": "WEC Energy Group"
+    },
+    {
+      "name": "Wells Fargo"
+    },
+    {
+      "name": "Western & Southern Financial Group"
+    },
+    {
+      "name": "Westinghouse Electric Company"
+    },
+    {
+      "name": "Wex"
+    },
+    {
+      "name": "WhatNot"
+    },
+    {
+      "name": "WhiteWater Midstream"
+    },
+    {
+      "name": "Winland Foods"
+    },
+    {
+      "name": "Woodward Governor"
+    },
+    {
+      "name": "Worcester Polytechnic Institute"
+    },
+    {
+      "name": "Workato"
+    },
+    {
+      "name": "Workday"
+    },
+    {
+      "name": "Xpansiv"
+    },
+    {
+      "name": "XPENG Motors",
+      "aliases": [
+        "XPENG"
+      ]
+    },
+    {
+      "name": "Xsolla"
+    },
+    {
+      "name": "Yotta Labs"
+    },
+    {
+      "name": "Zello"
+    },
+    {
+      "name": "Zettabyte"
+    },
+    {
+      "name": "Zip"
+    },
+    {
+      "name": "Zipline"
+    },
+    {
+      "name": "Zoom"
+    },
+    {
+      "name": "Zoomifier"
+    },
+    {
+      "name": "Zoox"
+    },
+    {
+      "name": "Zurich Insurance"
+    },
+    {
+      "name": "Zuru"
+    }
   ]
 }
