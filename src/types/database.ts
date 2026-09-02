@@ -32,6 +32,8 @@ export interface Posting {
   description_text: string | null;
   is_eligible: boolean;
   eligibility_checked_at: string | null;
+  /** Set when the user hides a posting they've decided not to apply to; null = visible. */
+  hidden_at: string | null;
 }
 
 /** Slim, fully-serializable projection of a `Posting` handed to the client-side Postings
@@ -50,6 +52,9 @@ export interface PostingRowData {
   /** `posted_at` was null, so `postedTs` is really `first_seen_at` (when we first saw it). */
   approximate: boolean;
   interviewFit: InterviewFit;
+  /** The user hid this posting. Hidden rows are still sent to the client so the explorer can
+   * count them and reveal them on demand without a refetch. */
+  hidden: boolean;
 }
 
 export interface Application {

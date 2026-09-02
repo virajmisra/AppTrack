@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { MarkAppliedButton } from "@/components/mark-applied-button";
+import { HidePostingButton } from "@/components/hide-posting-button";
 import { RelativeTime } from "@/components/relative-time";
 import { FitBadge, fitRowClassName } from "@/components/fit-badge";
 import { cn } from "@/lib/utils";
@@ -39,7 +40,9 @@ export function PostingRow({ posting }: { posting: PostingRowData }) {
       className={cn(
         ROW_GRID,
         "flex flex-col gap-1.5 border-b border-border/60 py-3 transition-colors hover:bg-muted/40 sm:gap-y-0 sm:py-2",
-        fitRowClassName(posting.interviewFit)
+        fitRowClassName(posting.interviewFit),
+        // Revealed only via "Show hidden" — dimmed so it reads as set aside, not as a live row.
+        posting.hidden && "opacity-55 hover:opacity-100"
       )}
     >
       {/* Opportunity tier — its own grid cell on desktop */}
@@ -83,7 +86,12 @@ export function PostingRow({ posting }: { posting: PostingRowData }) {
         <RelativeTime iso={iso} approximate={posting.approximate} />
       </span>
 
-      <div className="mt-1 sm:mt-0 sm:justify-self-end">
+      <div className="mt-1 flex items-center gap-1 sm:mt-0 sm:justify-self-end">
+        <HidePostingButton
+          postingId={posting.id}
+          hidden={posting.hidden}
+          label={`${posting.company} — ${posting.title}`}
+        />
         <MarkAppliedButton postingId={posting.id} />
       </div>
     </div>

@@ -14,6 +14,8 @@ const MAX_POSTING_AGE_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
 interface LoadedPostings {
   postings: PostingRowData[];
+  /** How many of `postings` the user has hidden — drives the "N hidden" toggle. */
+  hiddenCount: number;
   totalActiveCount: number;
   lastSyncedAt: string | null;
   syncError: string | null;
@@ -54,6 +56,7 @@ function toRowData(posting: Posting): PostingRowData {
     postedTs: new Date(posted).getTime(),
     approximate: posting.posted_at == null,
     interviewFit: getInterviewFit(posting.company),
+    hidden: posting.hidden_at != null,
   };
 }
 
@@ -99,8 +102,14 @@ async function loadActivePostings(): Promise<LoadedPostings | { setupError: stri
       .map(toRowData)
       .sort((a, b) => b.postedTs - a.postedTs);
 
+    // Hidden postings are deliberately still in this array, carrying `hidden: true`. The explorer
+    // filters them out of the default view and can reveal them without a refetch; counting them
+    // here keeps the "N hidden" affordance honest.
+    const hiddenCount = fitPostings.filter((posting) => posting.hidden).length;
+
     return {
       postings: fitPostings,
+      hiddenCount,
       totalActiveCount: deduped.length,
       lastSyncedAt,
       syncError,
@@ -160,6 +169,7 @@ export default async function Home() {
           ) : (
             <PostingsExplorer
               postings={result.postings}
+              hiddenCount={result.hiddenCount}
               totalActiveCount={result.totalActiveCount}
               nowSeed={result.nowSeed}
             />

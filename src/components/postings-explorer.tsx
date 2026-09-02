@@ -53,10 +53,14 @@ function useBucketingNow(seed: number): number {
 
 export function PostingsExplorer({
   postings,
+  hiddenCount,
   totalActiveCount,
   nowSeed,
 }: {
   postings: PostingRowData[];
+  /** How many of `postings` carry `hidden: true`. Passed rather than derived so the toggle can
+   * be rendered before the filtering memo runs. */
+  hiddenCount: number;
   totalActiveCount: number;
   /** Server's `Date.now()` at request time — the initial value keeps SSR and first client
    * render identical; a mount effect swaps in the real client clock. */
@@ -67,12 +71,19 @@ export function PostingsExplorer({
   const [tierFilter, setTierFilter] = useState<TierFilter>("all");
   const [sortMode, setSortMode] = useState<SortMode>("newest");
   const [search, setSearch] = useState("");
+  /** Hidden postings are excluded from every count and grouping until this is on, so the default
+   * view behaves exactly as it did before hiding existed. */
+  const [showHidden, setShowHidden] = useState(false);
 
   const query = search.trim().toLowerCase();
 
   const { sections, shownCount, dateCounts, tierCounts } = useMemo(() => {
+    // Everything below — chip counts included — works off this set, so the numbers on the date
+    // and tier chips always describe what "All" would actually show.
+    const base = showHidden ? postings : postings.filter((p) => !p.hidden);
+
     const dateCounts: Record<DateFilter, number> = {
-      all: postings.length,
+      all: base.length,
       today: 0,
       yesterday: 0,
       past_week: 0,
@@ -80,13 +91,13 @@ export function PostingsExplorer({
       older: 0,
     };
     const tierCounts: Record<TierFilter, number> = {
-      all: postings.length,
+      all: base.length,
       ready_now: 0,
       target: 0,
       reach: 0,
       unrated: 0,
     };
-    for (const p of postings) {
+    for (const p of base) {
       dateCounts[assignBucket(p.postedTs, now)] += 1;
       tierCounts[p.interviewFit] += 1;
     }
@@ -94,7 +105,7 @@ export function PostingsExplorer({
     const windowStart =
       dateFilter === "all" ? Number.NEGATIVE_INFINITY : bucketWindowStart(dateFilter, now);
 
-    const filtered = postings.filter((p) => {
+    const filtered = base.filter((p) => {
       if (p.postedTs < windowStart) return false;
       if (tierFilter !== "all" && p.interviewFit !== tierFilter) return false;
       if (query && !`${p.company} ${p.title}`.toLowerCase().includes(query)) return false;
@@ -133,7 +144,7 @@ export function PostingsExplorer({
     }
 
     return { sections, shownCount: filtered.length, dateCounts, tierCounts };
-  }, [postings, now, dateFilter, tierFilter, sortMode, query]);
+  }, [postings, showHidden, now, dateFilter, tierFilter, sortMode, query]);
 
   const dateOptions: SegmentedOption<DateFilter>[] = [
     { value: "all", label: "All", count: dateCounts.all },
@@ -226,22 +237,55 @@ export function PostingsExplorer({
             companies &amp; roles.
           </>
         )}
+        {/* Kept out of `filtersActive` on purpose: revealing hidden postings is a separate mode
+            from the filters, and "Clear filters" should not silently turn it off. */}
+        {(hiddenCount > 0 || showHidden) && (
+          <>
+            {" · "}
+            <button
+              type="button"
+              onClick={() => setShowHidden((v) => !v)}
+              aria-pressed={showHidden}
+              className="underline underline-offset-4 hover:text-foreground"
+            >
+              {showHidden
+                ? `Hide ${hiddenCount} hidden`
+                : `Show ${hiddenCount} hidden`}
+            </button>
+          </>
+        )}
       </p>
 
       {shownCount === 0 ? (
         <div className="rounded-lg border border-dashed p-6 text-sm text-muted-foreground">
-          No postings match these filters.{" "}
-          <button
-            type="button"
-            onClick={() => {
-              setDateFilter("all");
-              setTierFilter("all");
-              setSearch("");
-            }}
-            className="underline underline-offset-4 hover:text-foreground"
-          >
-            Clear filters
-          </button>
+          {!filtersActive && !showHidden && hiddenCount > 0 ? (
+            <>
+              You&apos;ve hidden all {hiddenCount} matching{" "}
+              {hiddenCount === 1 ? "posting" : "postings"}.{" "}
+              <button
+                type="button"
+                onClick={() => setShowHidden(true)}
+                className="underline underline-offset-4 hover:text-foreground"
+              >
+                Show hidden
+              </button>
+            </>
+          ) : (
+            <>
+              No postings match these filters.{" "}
+              <button
+                type="button"
+                onClick={() => {
+                  setDateFilter("all");
+                  setTierFilter("all");
+                  setSearch("");
+                }}
+                className="underline underline-offset-4 hover:text-foreground"
+              >
+                Clear filters
+              </button>
+            </>
+          )}
         </div>
       ) : (
         <div>
