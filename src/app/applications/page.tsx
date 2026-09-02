@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ApplicationsTable } from "@/components/applications-table";
 import { DetectedApplications } from "@/components/detected-applications";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
-import { getInterviewFit } from "@/lib/company-tier";
+import { getInterviewFit, loadInterviewFits } from "@/lib/company-tier";
 import type { Application, ApplicationRowData, ApplicationStatus } from "@/types/database";
 import { createManualApplication } from "./actions";
 
@@ -42,10 +42,11 @@ async function loadApplications(): Promise<
       .sort((a, b) => new Date(b.date_applied).getTime() - new Date(a.date_applied).getTime());
     // Resolve the company tier here, on the server, so `company-tier.ts` stays out of the
     // client bundle — the table island only ever sees the resolved string.
+    const fitIndex = await loadInterviewFits();
     const applications: ApplicationRowData[] = all
       .filter((app) => app.review_state !== "pending")
       .sort(sortByPipeline)
-      .map((app) => ({ ...app, interviewFit: getInterviewFit(app.company) }));
+      .map((app) => ({ ...app, interviewFit: getInterviewFit(app.company, fitIndex) }));
 
     return { applications, pendingDetections };
   } catch (err) {

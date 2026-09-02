@@ -7,7 +7,7 @@ import { getLastSyncedAt, isSyncStale, runSync } from "@/lib/sync";
 import { loadTargetCompanyNames } from "@/lib/target-companies";
 import { postingFitsGoals } from "@/lib/posting-fit";
 import { applicationMatchesPosting, type ApplicationLink } from "@/lib/application-match";
-import { getInterviewFit } from "@/lib/company-tier";
+import { getInterviewFit, loadInterviewFits, type InterviewFitIndex } from "@/lib/company-tier";
 import type { Posting, PostingRowData } from "@/types/database";
 
 const MAX_POSTING_AGE_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
@@ -44,7 +44,7 @@ async function ensureFreshData(): Promise<{ lastSyncedAt: string | null; syncErr
 
 /** Projects a full `Posting` down to the slim, serializable shape the client explorer needs.
  * The interview-fit tier is resolved here so `company-tier.ts` stays server-side. */
-function toRowData(posting: Posting): PostingRowData {
+function toRowData(posting: Posting, fitIndex: InterviewFitIndex): PostingRowData {
   const posted = posting.posted_at ?? posting.first_seen_at;
   return {
     id: posting.id,
@@ -55,7 +55,7 @@ function toRowData(posting: Posting): PostingRowData {
     payRangeText: posting.pay_range_text,
     postedTs: new Date(posted).getTime(),
     approximate: posting.posted_at == null,
-    interviewFit: getInterviewFit(posting.company),
+    interviewFit: getInterviewFit(posting.company, fitIndex),
     hidden: posting.hidden_at != null,
   };
 }
@@ -65,7 +65,7 @@ async function loadActivePostings(): Promise<LoadedPostings | { setupError: stri
     const { lastSyncedAt, syncError } = await ensureFreshData();
 
     const supabase = getSupabaseServerClient();
-    const [postingsRes, applicationsRes, targetCompanyNames] = await Promise.all([
+    const [postingsRes, applicationsRes, targetCompanyNames, fitIndex] = await Promise.all([
       supabase
         .from("postings")
         .select("*")
@@ -74,6 +74,7 @@ async function loadActivePostings(): Promise<LoadedPostings | { setupError: stri
         .order("posted_at", { ascending: false }),
       supabase.from("applications").select("posting_id, company, role_title, job_url"),
       loadTargetCompanyNames(),
+      loadInterviewFits(),
     ]);
 
     if (postingsRes.error) {
@@ -99,7 +100,7 @@ async function loadActivePostings(): Promise<LoadedPostings | { setupError: stri
         if (!posting.posted_at) return true;
         return now - new Date(posting.posted_at).getTime() <= MAX_POSTING_AGE_MS;
       })
-      .map(toRowData)
+      .map((posting) => toRowData(posting, fitIndex))
       .sort((a, b) => b.postedTs - a.postedTs);
 
     // Hidden postings are deliberately still in this array, carrying `hidden: true`. The explorer

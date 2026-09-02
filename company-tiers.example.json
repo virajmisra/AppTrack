@@ -1,0 +1,23 @@
+{
+  "_comment": "Committed example so a fresh clone builds. The real file is company-tiers.json (gitignored). Copy this to company-tiers.json and fill it in: each tier holds groups of companies that share a rationale, recorded in the group's note. Anything absent is reported as 'unrated', which is an honest 'not researched yet' rather than a negative signal.",
+  "tiers": {
+    "ready_now": {
+      "note": "Companies whose real internship interview loop you could pass with your current preparation — researched from actual candidate reports, not brand reputation.",
+      "groups": [
+        { "note": "Example group. Replace with your own research.", "companies": ["Example Corp"] }
+      ]
+    },
+    "target": {
+      "note": "Worth preparing for: a real coding bar, but in reach with focused practice.",
+      "groups": [
+        { "note": "Example group. Replace with your own research.", "companies": ["Example Systems"] }
+      ]
+    },
+    "reach": {
+      "note": "A heavy loop relative to current preparation — apply, but expect to prepare specifically.",
+      "groups": [
+        { "note": "Example group. Replace with your own research.", "companies": ["Example Labs"] }
+      ]
+    }
+  }
+}

@@ -43,6 +43,10 @@ yarn-error.log*
 applicant-profile.json
 applicant-credentials.json
 
+# personal judgements about named companies' interview processes — unflattering if misread, and
+# this repository is public. company-tiers.example.json is the committed stand-in.
+company-tiers.json
+
 # vercel
 .vercel
 
