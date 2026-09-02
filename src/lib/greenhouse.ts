@@ -2,7 +2,6 @@ import "server-only";
 import type { GreenhouseSource } from "./sources";
 import type { NormalizedPosting } from "./postings";
 import { titleMatchesFilters } from "./keyword-filter";
-import { extractPayRange } from "./pay";
 
 interface GreenhouseJob {
   id: number;
@@ -79,7 +78,6 @@ export async function fetchGreenhouseJobs(source: GreenhouseSource): Promise<Nor
       department: job.departments?.[0]?.name ?? null,
       url: job.absolute_url,
       posted_at: job.first_published ?? job.updated_at ?? null,
-      pay_range_text: job.content ? extractPayRange(stripHtml(job.content)) : null,
       raw: job,
     }));
 }

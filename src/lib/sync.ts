@@ -56,6 +56,10 @@ function dedupeByConflictKey(postings: NormalizedPosting[]): NormalizedPosting[]
   return [...byKey.values()];
 }
 
+/** Deliberately omits `pay_range_text`: this upsert runs ON CONFLICT DO UPDATE on every sync, so
+ * any column named here is overwritten every time. Pay is derived from the description during
+ * enrichment, which the adapters can't see at fetch time, so listing it here would reset every
+ * enriched value to the adapter's null on the next sync. `enrichEligibility` is its only writer. */
 function toRow(posting: NormalizedPosting, syncStartedAt: string) {
   return {
     source: posting.source,
@@ -66,7 +70,6 @@ function toRow(posting: NormalizedPosting, syncStartedAt: string) {
     department: posting.department,
     url: posting.url,
     posted_at: posting.posted_at,
-    pay_range_text: posting.pay_range_text,
     last_seen_at: syncStartedAt,
     is_active: true,
     raw: posting.raw,

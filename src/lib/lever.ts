@@ -2,8 +2,6 @@ import "server-only";
 import type { LeverSource } from "./sources";
 import type { NormalizedPosting } from "./postings";
 import { titleMatchesFilters } from "./keyword-filter";
-import { stripHtml } from "./greenhouse";
-import { extractPayRange } from "./pay";
 
 interface LeverPosting {
   id: string;
@@ -48,7 +46,6 @@ export async function fetchLeverPostings(source: LeverSource): Promise<Normalize
       department: job.categories?.team ?? job.categories?.department ?? null,
       url: job.hostedUrl,
       posted_at: job.createdAt ? new Date(job.createdAt).toISOString() : null,
-      pay_range_text: job.description ? extractPayRange(stripHtml(job.description)) : null,
       raw: job,
     }));
 }

@@ -48,7 +48,6 @@ function normalizeEntry(
     department: null,
     url: entry.url,
     posted_at: toPostedAt(entry.date_posted),
-    pay_range_text: null,
     raw,
   };
 }

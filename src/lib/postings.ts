@@ -9,7 +9,6 @@ export interface NormalizedPosting {
   department: string | null;
   url: string;
   posted_at: string | null;
-  pay_range_text: string | null;
   raw: unknown;
 }
 
