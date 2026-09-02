@@ -11,6 +11,7 @@ import {
   fetchDescriptionText,
 } from "@/lib/description";
 import { checkEligibility } from "@/lib/eligibility";
+import { extractPayRange } from "./pay";
 
 /** How long synced postings are trusted before the dashboard triggers a fresh sync on load. Adjust freely. */
 export const STALE_SYNC_THRESHOLD_MS = 4 * 60 * 60 * 1000; // 4 hours
@@ -33,7 +34,7 @@ export interface SourceSyncResult {
 export interface SyncSummary {
   synced_at: string;
   results: SourceSyncResult[];
-  eligibility: { checked: number; ineligible: number };
+  eligibility: { checked: number; ineligible: number; payFound: number };
 }
 
 function chunk<T>(items: T[], size: number): T[][] {
@@ -76,7 +77,7 @@ function toRow(posting: NormalizedPosting, syncStartedAt: string) {
  * been checked yet, fetches/extracts each description, and records is_eligible. Runs after the
  * main sync and never throws — a partial or failed enrichment pass shouldn't fail a sync that
  * otherwise succeeded. */
-async function enrichEligibility(): Promise<{ checked: number; ineligible: number }> {
+async function enrichEligibility(): Promise<{ checked: number; ineligible: number; payFound: number }> {
   const supabase = getSupabaseServerClient();
 
   const { data: candidates, error: fetchError } = await supabase
@@ -87,10 +88,11 @@ async function enrichEligibility(): Promise<{ checked: number; ineligible: numbe
     .limit(ELIGIBILITY_BATCH_SIZE);
 
   if (fetchError || !candidates || candidates.length === 0) {
-    return { checked: 0, ineligible: 0 };
+    return { checked: 0, ineligible: 0, payFound: 0 };
   }
 
   let ineligibleCount = 0;
+  let payFoundCount = 0;
   const checkedAt = new Date().toISOString();
 
   for (const batch of chunk(candidates, ELIGIBILITY_CONCURRENCY)) {
@@ -107,12 +109,21 @@ async function enrichEligibility(): Promise<{ checked: number; ineligible: numbe
           const { eligible, reason } = checkEligibility(descriptionText);
           if (!eligible) ineligibleCount++;
 
+          // Pay comes from the same text, so it is read here rather than at fetch time. This is
+          // the only place GitHub-feed postings — the overwhelming majority of the feed — can get
+          // it at all: their feed entry carries a URL and nothing else, so `github-feed.ts` has no
+          // description to read and sets `pay_range_text: null`. Only written when something was
+          // found, so an adapter that already supplied pay is never blanked.
+          const payRangeText = extractPayRange(descriptionText);
+          if (payRangeText) payFoundCount++;
+
           await supabase
             .from("postings")
             .update({
               description_text: descriptionText,
               is_eligible: eligible,
               eligibility_checked_at: checkedAt,
+              ...(payRangeText ? { pay_range_text: payRangeText } : {}),
             })
             .eq("id", row.id);
 
@@ -127,7 +138,7 @@ async function enrichEligibility(): Promise<{ checked: number; ineligible: numbe
     );
   }
 
-  return { checked: candidates.length, ineligible: ineligibleCount };
+  return { checked: candidates.length, ineligible: ineligibleCount, payFound: payFoundCount };
 }
 
 export async function getLastSyncedAt(): Promise<string | null> {
@@ -269,7 +280,7 @@ export async function runSync(): Promise<SyncSummary> {
     throw new Error(`Failed to record last_synced_at: ${metaError.message}`);
   }
 
-  const eligibility = await enrichEligibility().catch(() => ({ checked: 0, ineligible: 0 }));
+  const eligibility = await enrichEligibility().catch(() => ({ checked: 0, ineligible: 0, payFound: 0 }));
 
   return { synced_at: syncStartedAt, results, eligibility };
 }

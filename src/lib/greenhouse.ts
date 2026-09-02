@@ -2,6 +2,7 @@ import "server-only";
 import type { GreenhouseSource } from "./sources";
 import type { NormalizedPosting } from "./postings";
 import { titleMatchesFilters } from "./keyword-filter";
+import { extractPayRange } from "./pay";
 
 interface GreenhouseJob {
   id: number;
@@ -17,9 +18,6 @@ interface GreenhouseJob {
 interface GreenhouseBoardResponse {
   jobs: GreenhouseJob[];
 }
-
-const PAY_RANGE_REGEX =
-  /\$[\d,]+(?:\.\d{1,2})?\s*(?:-|to|–|—)\s*\$?[\d,]+(?:\.\d{1,2})?(?:\s*\/?\s*(?:hour|hr|year|yr|annually))?/i;
 
 const HTML_ENTITIES: Record<string, string> = {
   amp: "&",
@@ -56,13 +54,6 @@ export function stripHtml(html: string): string {
   return text.replace(/\s+/g, " ").trim();
 }
 
-/** Best-effort: returns the first "$X - $Y" style range found in the job description, verbatim. Not authoritative — many postings don't disclose pay here at all. */
-export function extractPayRange(contentHtml: string | undefined): string | null {
-  if (!contentHtml) return null;
-  const match = stripHtml(contentHtml).match(PAY_RANGE_REGEX);
-  return match ? match[0] : null;
-}
-
 export async function fetchGreenhouseJobs(source: GreenhouseSource): Promise<NormalizedPosting[]> {
   const res = await fetch(
     `https://boards-api.greenhouse.io/v1/boards/${encodeURIComponent(source.boardToken)}/jobs?content=true`,
@@ -88,7 +79,7 @@ export async function fetchGreenhouseJobs(source: GreenhouseSource): Promise<Nor
       department: job.departments?.[0]?.name ?? null,
       url: job.absolute_url,
       posted_at: job.first_published ?? job.updated_at ?? null,
-      pay_range_text: extractPayRange(job.content),
+      pay_range_text: job.content ? extractPayRange(stripHtml(job.content)) : null,
       raw: job,
     }));
 }
