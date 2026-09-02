@@ -926,6 +926,9 @@
       "name": "Felix Magazine"
     },
     {
+      "name": "Fenwick & West"
+    },
+    {
       "name": "Fidelity Investments",
       "aliases": [
         "Fidelity"
@@ -1061,6 +1064,9 @@
       "name": "Georgian Partners Growth"
     },
     {
+      "name": "Geotab"
+    },
+    {
       "name": "GitLab"
     },
     {
@@ -1166,6 +1172,9 @@
       "name": "Honeywell"
     },
     {
+      "name": "Hormel Foods"
+    },
+    {
       "name": "Howard University"
     },
     {
@@ -1218,6 +1227,9 @@
     },
     {
       "name": "iFLIP4"
+    },
+    {
+      "name": "Ignite Digital Services"
     },
     {
       "name": "IGS Energy"
@@ -1943,12 +1955,6 @@
       ]
     },
     {
-      "name": "PricewaterhouseCoopers",
-      "aliases": [
-        "PwC"
-      ]
-    },
-    {
       "name": "Primetals Technologies"
     },
     {
@@ -2292,6 +2298,9 @@
     },
     {
       "name": "State Farm"
+    },
+    {
+      "name": "Steel Dynamics"
     },
     {
       "name": "Stellar Science"
