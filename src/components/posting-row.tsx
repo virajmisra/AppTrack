@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { MarkAppliedButton } from "@/components/mark-applied-button";
 import { HidePostingButton } from "@/components/hide-posting-button";
 import { RelativeTime } from "@/components/relative-time";
-import { FitBadge, fitRowClassName } from "@/components/fit-badge";
+import { FitBadge, NewMarker, fitRowClassName } from "@/components/fit-badge";
 import { cn } from "@/lib/utils";
 import type { PostingRowData } from "@/types/database";
 
@@ -32,7 +32,14 @@ export function PostingListHeader() {
   );
 }
 
-export function PostingRow({ posting }: { posting: PostingRowData }) {
+export function PostingRow({
+  posting,
+  isNew = false,
+}: {
+  posting: PostingRowData;
+  /** This posting wasn't on the site last visit — see `useNewPostingIds`. */
+  isNew?: boolean;
+}) {
   const iso = new Date(posting.postedTs).toISOString();
 
   return (
@@ -59,15 +66,19 @@ export function PostingRow({ posting }: { posting: PostingRowData }) {
         </span>
       </div>
 
-      <a
-        href={posting.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        title={posting.title}
-        className="truncate text-sm font-medium underline-offset-4 hover:underline"
-      >
-        {posting.title}
-      </a>
+      {/* `min-w-0` so the title keeps truncating once the marker shares its grid cell. */}
+      <div className="flex min-w-0 items-center gap-1.5">
+        {isNew && <NewMarker fit={posting.interviewFit} />}
+        <a
+          href={posting.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={posting.title}
+          className="truncate text-sm font-medium underline-offset-4 hover:underline"
+        >
+          {posting.title}
+        </a>
+      </div>
 
       <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-muted-foreground sm:contents">
         <span

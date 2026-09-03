@@ -42,6 +42,23 @@ The postings pipeline is three deliberately decoupled layers:
 
 **Hiding postings you're not applying to** is the other way a posting leaves the feed, and it is deliberately *not* an `applications` row: `postings.hidden_at` (migration `0005`) records "I looked at this and I'm not applying", with no tracker entry, no status events and nothing on the Applications tab. Null = visible, so the column is inert until used. Server actions `hidePosting` / `unhidePosting` live in `src/app/actions.ts` (the Postings page's own actions file, parallel to `src/app/applications/actions.ts`). It survives re-syncs because `toRow()` in `src/lib/sync.ts` never puts this column in its upsert payload. `page.tsx` still sends hidden rows to the client, flagged `hidden: true` on `PostingRowData`, so `postings-explorer.tsx`'s "Show hidden" toggle reveals them (dimmed, with an Unhide button) without a refetch — hidden rows are excluded from every chip count until that toggle is on.
 
+**"New since your last visit"** marks postings that weren't on the site last time this browser
+looked, with a small tier-coloured `!` beside the title (`NewMarker` in
+`src/components/fit-badge.tsx`, which already owns the tier palette) plus an "N new since your last
+visit" count in the summary line. It is deliberately an **id-set diff**, not a
+`first_seen_at > lastVisitedAt` timestamp check: a posting routinely lands on the tab long after
+ingestion — its company gets added to `target-companies.json` by the hourly check, an application
+row that was hiding it is deleted, or it's unhidden — all genuinely new to the viewer while
+carrying a weeks-old `first_seen_at` that a timestamp comparison would skip. `src/lib/new-postings.ts`
+holds the pure diff/parse (fixture-tested in `new-postings.test.ts`);
+`src/components/use-new-postings.ts` owns the storage via a module-level `useSyncExternalStore`
+store — `localStorage` carries the committed id set across visits and `sessionStorage` carries the
+computed answer across a refresh, so reloading doesn't re-diff against the set the first load just
+wrote and clear every mark. Server renders no marks (no storage to read), so it stays
+hydration-safe like `relative-time.tsx`. A first-ever visit marks nothing rather than all ~600 rows,
+hidden rows are committed as "seen" so unhiding one isn't mistaken for new, and every storage access
+is wrapped so a private window just gets no marks.
+
 **Application auto-detection** keeps the tracker current without manual clicks, and the reading of each email is done by the Claude session, not by code. The app has no Gmail credentials of its own (deliberately — it avoids a Google OAuth app and refresh token in `.env.local`), so the **hourly check** must fetch the mail with its own tools regardless; since it has already read every message, it also says what each one means. It `GET`s `/api/applications/reconcile` for `{since, suggestedQuery, classificationContract}`, runs that Gmail search, and `POST`s the messages back as `{emails: [{id, from, subject, bodyText, date, classification}]}`, where `classification` is `{isApplicationEmail, company, roleTitle, jobUrl?, status, confidence}` — the contract returned by the GET. `src/lib/reconcile.ts` then does the parts that are lookups rather than acts of reading: resolving the company against `target-companies.json`, linking a posting, deduping, and writing an `applications` row tagged `source='email'` with `review_state` `'confirmed'` (high-confidence) or `'pending'` (queued in the amber strip on the Applications page for a one-click confirm; "Not me" deletes the row and the posting returns). `source_ref` (the Gmail message id) makes re-runs idempotent.
 
 `src/lib/application-emails.ts`'s keyword/regex parser is now only the **fallback**, used for an email posted with no `classification`. It is kept working (and fixture-tested — `npm test`) so the endpoint degrades rather than fails, but it should not be the primary path: reading meaning off fixed phrases mis-parses real mail in ways an actual reading doesn't ("we can't move forward with your application" recorded as `applied` because that wording wasn't in the rejection list; a leading requisition id swallowing a job title; a spelled-out company name landing in the role field). Wanting to add another phrase to a marker list in that file is the signal to classify in the session instead.

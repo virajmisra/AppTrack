@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { SegmentedControl, type SegmentedOption } from "@/components/ui/segmented-control";
 import { FitBadge, TIER_ORDER, fitLabel } from "@/components/fit-badge";
 import { PostingListHeader, PostingRow } from "@/components/posting-row";
+import { useNewPostingIds } from "@/components/use-new-postings";
 import {
   assignBucket,
   bucketWindowStart,
@@ -67,6 +68,9 @@ export function PostingsExplorer({
   nowSeed: number;
 }) {
   const now = useBucketingNow(nowSeed);
+  // Diffed against this browser's last visit, so it covers every posting the server sent —
+  // hidden ones included — regardless of the filters in force below.
+  const newIds = useNewPostingIds(postings);
   const [dateFilter, setDateFilter] = useState<DateFilter>("all");
   const [tierFilter, setTierFilter] = useState<TierFilter>("all");
   const [sortMode, setSortMode] = useState<SortMode>("newest");
@@ -77,7 +81,7 @@ export function PostingsExplorer({
 
   const query = search.trim().toLowerCase();
 
-  const { sections, shownCount, dateCounts, tierCounts } = useMemo(() => {
+  const { sections, shownCount, newCount, dateCounts, tierCounts } = useMemo(() => {
     // Everything below — chip counts included — works off this set, so the numbers on the date
     // and tier chips always describe what "All" would actually show.
     const base = showHidden ? postings : postings.filter((p) => !p.hidden);
@@ -143,8 +147,10 @@ export function PostingsExplorer({
       }));
     }
 
-    return { sections, shownCount: filtered.length, dateCounts, tierCounts };
-  }, [postings, showHidden, now, dateFilter, tierFilter, sortMode, query]);
+    const newCount = filtered.reduce((total, p) => total + (newIds.has(p.id) ? 1 : 0), 0);
+
+    return { sections, shownCount: filtered.length, newCount, dateCounts, tierCounts };
+  }, [postings, showHidden, now, dateFilter, tierFilter, sortMode, query, newIds]);
 
   const dateOptions: SegmentedOption<DateFilter>[] = [
     { value: "all", label: "All", count: dateCounts.all },
@@ -237,6 +243,14 @@ export function PostingsExplorer({
             companies &amp; roles.
           </>
         )}
+        {newCount > 0 && (
+          <>
+            {" · "}
+            <span className="font-medium text-foreground">
+              {newCount} new since your last visit
+            </span>
+          </>
+        )}
         {/* Kept out of `filtersActive` on purpose: revealing hidden postings is a separate mode
             from the filters, and "Clear filters" should not silently turn it off. */}
         {(hiddenCount > 0 || showHidden) && (
@@ -303,7 +317,11 @@ export function PostingsExplorer({
                   </span>
                 </h2>
                 {section.rows.map((posting) => (
-                  <PostingRow key={posting.id} posting={posting} />
+                  <PostingRow
+                    key={posting.id}
+                    posting={posting}
+                    isNew={newIds.has(posting.id)}
+                  />
                 ))}
               </section>
             ))}

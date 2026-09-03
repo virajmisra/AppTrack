@@ -10,25 +10,36 @@ import type { InterviewFit } from "@/types/database";
  * same tier without pulling the posting row — and its "Mark applied" button — into that bundle. */
 const FIT_DISPLAY: Record<
   InterviewFit,
-  { label: string; dotClassName: string; pillClassName: string; rowClassName: string }
+  {
+    label: string;
+    dotClassName: string;
+    pillClassName: string;
+    rowClassName: string;
+    markClassName: string;
+  }
 > = {
   ready_now: {
     label: "Ready now",
     dotClassName: "bg-emerald-500",
     pillClassName: "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300",
     rowClassName: "bg-emerald-500/[0.04]",
+    markClassName:
+      "border-emerald-500/40 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300",
   },
   target: {
     label: "Target",
     dotClassName: "bg-sky-500",
     pillClassName: "border-sky-500/30 bg-sky-500/10 text-sky-700 dark:text-sky-300",
     rowClassName: "",
+    markClassName: "border-sky-500/40 bg-sky-500/15 text-sky-700 dark:text-sky-300",
   },
   reach: {
     label: "Reach",
     dotClassName: "bg-amber-500",
     pillClassName: "border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300",
     rowClassName: "",
+    markClassName:
+      "border-amber-500/40 bg-amber-500/15 text-amber-700 dark:text-amber-300",
   },
   // "Unrated" isn't a negative signal, just "not researched yet" — dashed and uncoloured so it
   // reads as absent information rather than as a fourth ranking below Reach.
@@ -37,6 +48,7 @@ const FIT_DISPLAY: Record<
     dotClassName: "border border-dashed border-muted-foreground/50",
     pillClassName: "border-dashed border-muted-foreground/30 text-muted-foreground/70",
     rowClassName: "",
+    markClassName: "border-dashed border-muted-foreground/40 text-muted-foreground/80",
   },
 };
 
@@ -66,6 +78,28 @@ export function FitBadge({ fit, className }: { fit: InterviewFit; className?: st
     >
       <span aria-hidden className={cn("size-1.5 shrink-0 rounded-full", display.dotClassName)} />
       {display.label}
+    </span>
+  );
+}
+
+/** Marks a posting that wasn't on the site the last time this browser looked — a small "!"
+ * carrying the row's own Opportunity colour, so the emphasis reads as "new *and* worth your
+ * time" in one glance instead of competing with the tier signal.
+ *
+ * Which postings qualify is decided client-side by `useNewPostingIds`; this component is purely
+ * presentational so the tier palette above stays the single place these hues are defined. */
+export function NewMarker({ fit, className }: { fit: InterviewFit; className?: string }) {
+  return (
+    <span
+      title="New since your last visit"
+      className={cn(
+        "inline-flex size-4 shrink-0 items-center justify-center rounded-full border text-[0.7rem] leading-none font-bold",
+        FIT_DISPLAY[fit].markClassName,
+        className
+      )}
+    >
+      <span aria-hidden>!</span>
+      <span className="sr-only">New since your last visit</span>
     </span>
   );
 }
