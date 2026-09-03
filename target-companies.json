@@ -13,6 +13,9 @@
       "name": "AARP"
     },
     {
+      "name": "ABB"
+    },
+    {
       "name": "AbbVie"
     },
     {
@@ -31,6 +34,9 @@
       "name": "Adobe"
     },
     {
+      "name": "Advanced Robotics for Manufacturing"
+    },
+    {
       "name": "Aerotech"
     },
     {
@@ -41,6 +47,9 @@
     },
     {
       "name": "Affirm"
+    },
+    {
+      "name": "After School Matters"
     },
     {
       "name": "AfterQuery"
@@ -76,10 +85,16 @@
       "name": "Allegheny County"
     },
     {
+      "name": "Allied Solutions"
+    },
+    {
       "name": "Allstate"
     },
     {
       "name": "Altamira Technologies"
+    },
+    {
+      "name": "AltaML"
     },
     {
       "name": "Altice USA"
@@ -426,6 +441,9 @@
       "name": "Cadence Design Systems"
     },
     {
+      "name": "CAE"
+    },
+    {
       "name": "CalAmp"
     },
     {
@@ -550,6 +568,9 @@
       "name": "Clinical Ink"
     },
     {
+      "name": "Clorox"
+    },
+    {
       "name": "CloudFit Software"
     },
     {
@@ -610,6 +631,9 @@
       "name": "Continental Resources"
     },
     {
+      "name": "Contoro"
+    },
+    {
       "name": "Cooper Companies"
     },
     {
@@ -643,10 +667,16 @@
       "name": "Crowe"
     },
     {
+      "name": "Crum & Forster Insurance"
+    },
+    {
       "name": "CSX"
     },
     {
       "name": "CTGT"
+    },
+    {
+      "name": "Cushman & Wakefield"
     },
     {
       "name": "CuspAI"
@@ -806,6 +836,9 @@
       "name": "Edison International"
     },
     {
+      "name": "Education Unlimited"
+    },
+    {
       "name": "Egra"
     },
     {
@@ -927,6 +960,9 @@
     },
     {
       "name": "Fannie Mae"
+    },
+    {
+      "name": "Faraday Future"
     },
     {
       "name": "FAST Enterprises"
@@ -1082,6 +1118,9 @@
       "name": "GitLab"
     },
     {
+      "name": "GlobalFoundries"
+    },
+    {
       "name": "GlossGenius"
     },
     {
@@ -1103,6 +1142,9 @@
       "name": "Grass Valley"
     },
     {
+      "name": "Gritt"
+    },
+    {
       "name": "Gritt Robotics Inc"
     },
     {
@@ -1119,6 +1161,9 @@
     },
     {
       "name": "Gusto"
+    },
+    {
+      "name": "Hadrian"
     },
     {
       "name": "Haize Labs"
@@ -1354,6 +1399,9 @@
       "aliases": [
         "J&J"
       ]
+    },
+    {
+      "name": "Jones Lang LaSalle"
     },
     {
       "name": "JPMorgan Chase",
@@ -1622,6 +1670,9 @@
       "name": "Mindsmith"
     },
     {
+      "name": "Mirego"
+    },
+    {
       "name": "Mistral AI",
       "aliases": [
         "Mistral"
@@ -1694,6 +1745,9 @@
       "name": "Nash"
     },
     {
+      "name": "National Information Solutions Cooperative"
+    },
+    {
       "name": "National Laboratory of the Rockies"
     },
     {
@@ -1760,6 +1814,9 @@
       "name": "Nordstrom"
     },
     {
+      "name": "North American Construction Group"
+    },
+    {
       "name": "North Atlantic Industries"
     },
     {
@@ -1800,6 +1857,12 @@
       "aliases": [
         "Oxy"
       ]
+    },
+    {
+      "name": "Oceanus Marine Technologies"
+    },
+    {
+      "name": "Odys Aviation"
     },
     {
       "name": "Ohio State University"
@@ -1985,6 +2048,9 @@
       "name": "Prospect Equities"
     },
     {
+      "name": "Protech Automotive Solutions"
+    },
+    {
       "name": "Protiviti"
     },
     {
@@ -1995,6 +2061,9 @@
     },
     {
       "name": "PSECU"
+    },
+    {
+      "name": "PsiQuantum"
     },
     {
       "name": "PSP Investments"
@@ -2015,7 +2084,13 @@
       "name": "Qualcomm"
     },
     {
+      "name": "Qualified Health"
+    },
+    {
       "name": "Quantbot Technologies"
+    },
+    {
+      "name": "Quantinuum"
     },
     {
       "name": "QuEra Computing"
@@ -2120,6 +2195,9 @@
       "name": "RRS Group"
     },
     {
+      "name": "RSM"
+    },
+    {
       "name": "RTX",
       "aliases": [
         "Raytheon"
@@ -2210,6 +2288,9 @@
       "name": "Shopify"
     },
     {
+      "name": "Shure"
+    },
+    {
       "name": "ShyftLabs"
     },
     {
@@ -2265,6 +2346,9 @@
     },
     {
       "name": "Sony"
+    },
+    {
+      "name": "Sorting Robotics"
     },
     {
       "name": "SOTI"
@@ -2765,6 +2849,12 @@
     },
     {
       "name": "Workday"
+    },
+    {
+      "name": "Xaira Therapeutics"
+    },
+    {
+      "name": "Xcel Energy"
     },
     {
       "name": "Xpansiv"
