@@ -1,9 +1,6 @@
 {
   "companies": [
     {
-      "name": " CCC Intelligent Solutions"
-    },
-    {
       "name": "10a Labs"
     },
     {
@@ -68,6 +65,9 @@
     },
     {
       "name": "Akuna Capital"
+    },
+    {
+      "name": "Akuna Capital University"
     },
     {
       "name": "Alayacare"
@@ -480,6 +480,9 @@
       "name": "Carnegie Mellon University"
     },
     {
+      "name": "Carrier Global"
+    },
+    {
       "name": "Carta"
     },
     {
@@ -489,6 +492,9 @@
       "name": "Catalist"
     },
     {
+      "name": " CCC Intelligent Solutions"
+    },
+    {
       "name": "Celonis"
     },
     {
@@ -496,6 +502,9 @@
     },
     {
       "name": "Centerfield"
+    },
+    {
+      "name": "Centific"
     },
     {
       "name": "Cerebras"
@@ -566,6 +575,9 @@
     },
     {
       "name": "Clinical Ink"
+    },
+    {
+      "name": "Clinton Foundation"
     },
     {
       "name": "Clorox"
@@ -881,6 +893,9 @@
       "name": "Ensemble Health Partners"
     },
     {
+      "name": "Enterprise Holdings"
+    },
+    {
       "name": "Epic Games"
     },
     {
@@ -894,6 +909,9 @@
     },
     {
       "name": "Eragon"
+    },
+    {
+      "name": "Ernst & Young"
     },
     {
       "name": "Espa AI"
@@ -1158,6 +1176,9 @@
     },
     {
       "name": "Gulfstream"
+    },
+    {
+      "name": "Gumloop"
     },
     {
       "name": "Gusto"
@@ -1441,6 +1462,9 @@
       "name": "Keysight Technologies"
     },
     {
+      "name": "Kinaxis"
+    },
+    {
       "name": "Kinder Morgan"
     },
     {
@@ -1454,6 +1478,9 @@
     },
     {
       "name": "Kognitos"
+    },
+    {
+      "name": "Kokosing"
     },
     {
       "name": "KPMG"
@@ -1481,9 +1508,6 @@
     },
     {
       "name": "LAXIR"
-    },
-    {
-      "name": "Léger"
     },
     {
       "name": "Leidos"
@@ -1546,6 +1570,12 @@
       "name": "Lyft"
     },
     {
+      "name": "Léger"
+    },
+    {
+      "name": "M.C. Dean"
+    },
+    {
       "name": "Mackenzie Investments"
     },
     {
@@ -1568,6 +1598,9 @@
     },
     {
       "name": "Marmon Holdings"
+    },
+    {
+      "name": "Marquee Brands"
     },
     {
       "name": "Marsh"
@@ -1619,6 +1652,9 @@
     },
     {
       "name": "Menasha Corporation"
+    },
+    {
+      "name": "Mercer University"
     },
     {
       "name": "Merchants Bank of Indiana"
@@ -1739,9 +1775,6 @@
       "name": "MyEmployment"
     },
     {
-      "name": "Naïve"
-    },
-    {
       "name": "Nash"
     },
     {
@@ -1763,7 +1796,13 @@
       ]
     },
     {
+      "name": "Naïve"
+    },
+    {
       "name": "NBCUniversal"
+    },
+    {
+      "name": "NBT Bank"
     },
     {
       "name": "Nebo"
@@ -1791,6 +1830,9 @@
     },
     {
       "name": "Nextiva"
+    },
+    {
+      "name": "Nidec"
     },
     {
       "name": "Nike"
@@ -1928,6 +1970,9 @@
       "name": "Panasonic Holdings"
     },
     {
+      "name": "Parkdepot"
+    },
+    {
       "name": "Parsons"
     },
     {
@@ -1962,6 +2007,9 @@
       "aliases": [
         "Perplexity"
       ]
+    },
+    {
+      "name": "Perry Homes"
     },
     {
       "name": "Persona AI"
@@ -2108,6 +2156,9 @@
       "name": "RapDev"
     },
     {
+      "name": "RAVL"
+    },
+    {
       "name": "Realm"
     },
     {
@@ -2181,6 +2232,9 @@
     },
     {
       "name": "Roblox"
+    },
+    {
+      "name": "Rockefeller Capital Management"
     },
     {
       "name": "ROCKWOOL Group"
@@ -2388,6 +2442,9 @@
     },
     {
       "name": "Squarespace"
+    },
+    {
+      "name": "Star Dental Partners"
     },
     {
       "name": "StarSling"
@@ -2605,6 +2662,9 @@
       "name": "Trane Technologies"
     },
     {
+      "name": "Transcard Payments"
+    },
+    {
       "name": "TransMarket Group"
     },
     {
@@ -2696,6 +2756,9 @@
     },
     {
       "name": "University of Pikeville"
+    },
+    {
+      "name": "University of Rochester"
     },
     {
       "name": "University of St. Thomas"
