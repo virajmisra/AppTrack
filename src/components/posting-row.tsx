@@ -7,9 +7,15 @@ import { cn } from "@/lib/utils";
 import type { PostingRowData } from "@/types/database";
 
 /** Shared column template — the sticky header strip and every row use the same track sizes so
- * they line up. Below `sm` the row ignores this and stacks (see `PostingRow`). */
+ * they line up. Below `sm` the row ignores this and stacks (see `PostingRow`).
+ *
+ * The header and each row are *separate* grid containers that only share this string, so every
+ * track has to be intrinsically sized the same in both. The last track is therefore a fixed width
+ * rather than `auto`: `auto` sized itself to the header label in one grid and to the row's action
+ * buttons in the other, and `minmax(0,1fr)` on Title silently absorbed the ~60px difference —
+ * which pushed the Location/Pay/Posted labels out of line with their own columns. */
 export const ROW_GRID =
-  "sm:grid sm:grid-cols-[7rem_9rem_minmax(0,1fr)_9rem_6rem_6.5rem_auto] sm:items-center sm:gap-x-3";
+  "sm:grid sm:grid-cols-[7rem_9rem_minmax(0,1fr)_9rem_6rem_6.5rem_9.5rem] sm:items-center sm:gap-x-3";
 
 /** Desktop column-label strip. Sticks to the top of the viewport while the list scrolls — works
  * because the list is no longer wrapped in the `<Table>`'s `overflow-x-auto` container. */
@@ -27,7 +33,6 @@ export function PostingListHeader() {
       <span>Location</span>
       <span>Pay</span>
       <span>Posted</span>
-      <span className="justify-self-end pr-1">Application</span>
     </div>
   );
 }
