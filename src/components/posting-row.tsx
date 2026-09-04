@@ -8,13 +8,18 @@ import type { PostingRowData } from "@/types/database";
 /** Shared column template — the sticky header strip and every row use the same track sizes so
  * they line up. Below `sm` the row ignores this and stacks (see `PostingRow`).
  *
- * The last track is a fixed width rather than `auto` on purpose: the header and the rows are two
- * separate grid containers that only share this string, so an `auto` track sized itself to each
- * container's own content — the word "Application" in the header, the buttons in a row — and the
- * flexible title column absorbed the difference, leaving every column right of Title misaligned
- * between the header and the rows it labels. A fixed track makes both grids resolve identically. */
+ * The header and each row are *separate* grid containers that only share this string, so every
+ * track has to be intrinsically sized the same in both. The last track is therefore a fixed width
+ * rather than `auto`: `auto` sized itself to each container's own content — the header label in one
+ * grid, the row's action buttons in the other — and `minmax(0,1fr)` on Title silently absorbed the
+ * difference, pushing the Location/Pay/Posted labels out of line with their own columns.
+ *
+ * 4rem holds the icon-only action pair (two 28px buttons + a 4px gap = 60px) with 4px to spare. The
+ * header deliberately renders only six cells against these seven tracks — the "Application" label
+ * was removed, since that cell holds controls rather than a column of data, and each button carries
+ * its own tooltip and aria-label. The empty seventh track is what keeps the two grids identical. */
 export const ROW_GRID =
-  "sm:grid sm:grid-cols-[7rem_9rem_minmax(0,1fr)_9rem_6rem_6.5rem_5.5rem] sm:items-center sm:gap-x-3";
+  "sm:grid sm:grid-cols-[7rem_9rem_minmax(0,1fr)_9rem_6rem_6.5rem_4rem] sm:items-center sm:gap-x-3";
 
 /** Desktop column-label strip. Sticks to the top of the viewport while the list scrolls — works
  * because the list is no longer wrapped in the `<Table>`'s `overflow-x-auto` container. */
@@ -32,7 +37,6 @@ export function PostingListHeader() {
       <span>Location</span>
       <span>Pay</span>
       <span>Posted</span>
-      <span className="justify-self-end">Application</span>
     </div>
   );
 }
