@@ -1,15 +1,20 @@
 import { Badge } from "@/components/ui/badge";
-import { MarkAppliedButton } from "@/components/mark-applied-button";
-import { HidePostingButton } from "@/components/hide-posting-button";
+import { PostingActions } from "@/components/posting-actions";
 import { RelativeTime } from "@/components/relative-time";
 import { FitBadge, NewMarker, fitRowClassName } from "@/components/fit-badge";
 import { cn } from "@/lib/utils";
 import type { PostingRowData } from "@/types/database";
 
 /** Shared column template — the sticky header strip and every row use the same track sizes so
- * they line up. Below `sm` the row ignores this and stacks (see `PostingRow`). */
+ * they line up. Below `sm` the row ignores this and stacks (see `PostingRow`).
+ *
+ * The last track is a fixed width rather than `auto` on purpose: the header and the rows are two
+ * separate grid containers that only share this string, so an `auto` track sized itself to each
+ * container's own content — the word "Application" in the header, the buttons in a row — and the
+ * flexible title column absorbed the difference, leaving every column right of Title misaligned
+ * between the header and the rows it labels. A fixed track makes both grids resolve identically. */
 export const ROW_GRID =
-  "sm:grid sm:grid-cols-[7rem_9rem_minmax(0,1fr)_9rem_6rem_6.5rem_auto] sm:items-center sm:gap-x-3";
+  "sm:grid sm:grid-cols-[7rem_9rem_minmax(0,1fr)_9rem_6rem_6.5rem_5.5rem] sm:items-center sm:gap-x-3";
 
 /** Desktop column-label strip. Sticks to the top of the viewport while the list scrolls — works
  * because the list is no longer wrapped in the `<Table>`'s `overflow-x-auto` container. */
@@ -27,7 +32,7 @@ export function PostingListHeader() {
       <span>Location</span>
       <span>Pay</span>
       <span>Posted</span>
-      <span className="justify-self-end pr-1">Application</span>
+      <span className="justify-self-end">Application</span>
     </div>
   );
 }
@@ -49,7 +54,11 @@ export function PostingRow({
         "flex flex-col gap-1.5 border-b border-border/60 py-3 transition-colors hover:bg-muted/40 sm:gap-y-0 sm:py-2",
         fitRowClassName(posting.interviewFit),
         // Revealed only via "Show hidden" — dimmed so it reads as set aside, not as a live row.
-        posting.hidden && "opacity-55 hover:opacity-100"
+        // `opacity` on the row creates a compositing group, so the action buttons can't opt out of
+        // it; 70% (rather than 55%) is what keeps the icon-only restore arrow findable at rest.
+        // `focus-within` matters because `hover` is pointer-only — without it a keyboard user lands
+        // on the restore button while the row is still dimmed.
+        posting.hidden && "opacity-70 hover:opacity-100 focus-within:opacity-100"
       )}
     >
       {/* Opportunity tier — its own grid cell on desktop */}
@@ -97,14 +106,11 @@ export function PostingRow({
         <RelativeTime iso={iso} approximate={posting.approximate} />
       </span>
 
-      <div className="mt-1 flex items-center gap-1 sm:mt-0 sm:justify-self-end">
-        <HidePostingButton
-          postingId={posting.id}
-          hidden={posting.hidden}
-          label={`${posting.company} — ${posting.title}`}
-        />
-        <MarkAppliedButton postingId={posting.id} />
-      </div>
+      <PostingActions
+        postingId={posting.id}
+        hidden={posting.hidden}
+        label={`${posting.company} — ${posting.title}`}
+      />
     </div>
   );
 }
